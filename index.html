@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Shot List">
+<meta name="theme-color" content="#245A6B">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="icon-180.png">
+<title>Shot List</title>
+<style>
+:root{--bg:#EEF2F2;--card:#fff;--ink:#13212A;--muted:#5E6F76;--faint:#8A989D;--line:#D3DCDD;--sea:#245A6B;--sea-soft:#D9E8EC;--buoy:#D94F22;--ok:#2F7D4F}
+@media (prefers-color-scheme:dark){:root{--bg:#0A1115;--card:#16232A;--ink:#E4ECEC;--muted:#9AAAB0;--faint:#6E8088;--line:#26363F;--sea:#7FB6C6;--sea-soft:#1C3440;--buoy:#F0693A;--ok:#6CC08C}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 -apple-system,system-ui,sans-serif}
+button,input,textarea,select{font:inherit;color:inherit}
+.app{max-width:560px;margin:0 auto;padding:calc(14px + env(safe-area-inset-top)) 14px calc(40px + env(safe-area-inset-bottom))}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;margin-bottom:10px}
+h1{margin:0;font-size:28px;letter-spacing:-.01em}
+.net{font-size:12px;font-weight:600;color:var(--faint);display:flex;gap:6px;align-items:center}
+.net i{width:8px;height:8px;border-radius:50%;background:var(--ok)}.net.off i{background:var(--faint)}
+.prog{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:10px 12px;margin-bottom:12px}
+.prog .row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-weight:600}
+.bar{height:7px;border-radius:4px;background:var(--line);overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--ok)}
+.cat{margin-top:14px}
+.cathead{width:100%;display:flex;justify-content:space-between;align-items:center;border:0;background:transparent;padding:6px 2px;font-weight:700;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.vid{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-top:8px;overflow:hidden}
+.vhead{width:100%;display:flex;align-items:center;gap:10px;border:0;background:transparent;padding:13px 14px;text-align:left}
+.vhead .t{flex:1;font-weight:650;font-size:16px}
+.cnt{font-size:13px;color:var(--muted);font-weight:600}.cnt.all{color:var(--ok)}
+.chev{color:var(--faint);transition:transform .15s}.open>.vhead .chev,.open>.cathead .chev{transform:rotate(90deg)}
+.vbody{padding:0 14px 12px}
+.desc{color:var(--muted);font-size:14px;margin:0 0 6px}
+.ref{font-size:13px;color:var(--sea);word-break:break-all}
+.scene{border-top:1px solid var(--line);padding:12px 0 10px}
+.srow{display:flex;gap:10px;align-items:flex-start}
+.box{width:30px;height:30px;flex:none;border-radius:8px;border:2px solid var(--faint);background:transparent;display:grid;place-items:center;color:#fff;font-size:16px;font-weight:700;padding:0}
+.done .box{background:var(--ok);border-color:var(--ok)}
+.what{flex:1;min-width:0;font-size:15px;padding:4px 0;white-space:pre-wrap;word-wrap:break-word}
+.done .what{color:var(--faint);text-decoration:line-through}
+.what:empty::before{content:"Tap to describe the shot";color:var(--faint)}
+textarea.what{border:1px solid var(--sea);border-radius:8px;padding:6px 8px;background:var(--bg);resize:none;min-height:60px;outline:none;text-decoration:none}
+.x{border:0;background:transparent;color:var(--faint);font-size:20px;padding:0 4px;line-height:1}
+.x.arm{color:var(--buoy);font-size:12px;font-weight:700}
+.pills{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0 0 40px}
+.pill{border:1px dashed var(--line);background:transparent;border-radius:999px;padding:6px 11px;font-size:13px;font-weight:650;color:var(--faint);min-width:64px}
+.pill.on{border:1px solid var(--sea);background:var(--sea);color:var(--card)}
+.add{width:100%;margin-top:8px;border:1.5px dashed var(--line);background:transparent;border-radius:12px;padding:11px;font-weight:700;color:var(--sea)}
+.vtools{display:flex;justify-content:space-between;margin-top:6px}
+.link{border:0;background:transparent;color:var(--sea);font-weight:600;font-size:14px;padding:6px 0}
+.link.red{color:var(--buoy)}
+.newvid{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;display:grid;gap:8px;margin-bottom:6px}
+.newvid input,.newvid select{width:100%;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--bg)}
+.btn{border:0;border-radius:999px;background:var(--sea);color:var(--card);font-weight:700;padding:12px}
+.foot{margin-top:24px;display:grid;gap:8px}
+.foot .row{display:flex;gap:8px}.foot .row>*{flex:1}
+.ghost{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:11px;font-weight:600;text-align:center}
+.note{font-size:12.5px;color:var(--faint);text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:999px;font-weight:600;font-size:14px;z-index:9}
+</style>
+</head>
+<body>
+<div class="app">
+  <header><h1>Shot List</h1><span class="net" id="net"><i></i><span></span></span></header>
+  <div class="prog" id="prog"></div>
+  <button class="add" id="newVidBtn" style="margin:0 0 4px">+ New video</button>
+  <div id="newVid"></div>
+  <div id="list"></div>
+  <div class="foot">
+    <div class="row"><button class="ghost" id="backup">Save backup</button><label class="ghost">Restore backup<input type="file" id="restore" accept="application/json,.json" hidden></label></div>
+    <p class="note">Everything saves on this phone and works with no signal. Save a backup now and then to keep a copy.</p>
+  </div>
+</div>
+<div id="toast"></div>
+<script>
+(() => {
+const PILLS = [
+  ["Format",   ["Portrait","Landscape"]],
+  ["Media",    ["Video","Photo"]],
+  ["Who films",["Selfie","Friend","Tripod"]],
+  ["Move",     ["Still","Swing","Walk","Zoom/Pan"]],
+  ["Distance", ["Wide","Medium","Close-up"]]
+];
+const SEED = [{"cat":"Copy viral videos","videos":[{"id":"v1-copy-viral","title":"Daxton thang","desc":"Friends goofing around in the mountains, ending on sunset. Warm, funny, nostalgic.","ref":"instagram.com/reel/Dd76ANOxbhy","scenes":[{"id":"s2","what":"Selfie with the whole crew squeezed in, laughing, then swing the phone left to reveal the view behind you","done":false,"p":["Portrait","Video","Selfie","Swing",""]},{"id":"s3","what":"Two or three of us talking and goofing off with the mountains filling the background","done":false,"p":["Portrait","Video","","Still","Medium"]},{"id":"s4","what":"Everyone throws an arm around each other and grins at the camera","done":false,"p":["Portrait","Video","","Still","Medium"]},{"id":"s5","what":"Two of us wrestling on the ground while everyone else cheers","done":false,"p":["Portrait","Video","","Still","Medium"]},{"id":"s6","what":"Selfie facing the group, then slowly turn the camera away from us to the sunset","done":false,"p":["Portrait","Video","Selfie","",""]}]},{"id":"v2-copy-viral","title":"Peeing connects you with nature","desc":"Text: \"Peeing outside connects you with nature.\" Montage of pee spots. Goofy.","ref":"","scenes":[{"id":"s1","what":"Film 4 to 6 different pee spots from behind (tasteful): a cliff edge, a tree, a river, a mountain view","done":false,"p":["Portrait","Video","","",""]},{"id":"s2","what":"Open on the line as on-screen text","done":false,"p":["","Video","","",""]},{"id":"s3","what":"Cut every clip on the beat of an upbeat song","done":false,"p":["","Video","","",""]}]},{"id":"v3-copy-viral","title":"How to pee outside","desc":"Deadpan step-by-step tutorial on peeing outside. Ends on a slow thumbs up.","ref":"","scenes":[{"id":"s1","what":"Set up facing away from the camera at a scenic spot. Deadpan, serious documentary voice the whole way","done":false,"p":["Portrait","Video","Tripod","Still",""]},{"id":"s2","what":"\"Spread your legs first. Prevent drippage.\"","done":false,"p":["","Video","","",""]},{"id":"s3","what":"\"Get in a nice squat.\"","done":false,"p":["","Video","","",""]},{"id":"s4","what":"\"Pelvic tilt forward.\"","done":false,"p":["","Video","","",""]},{"id":"s5","what":"\"And relax. Don't tense. Don't break the stream. Let her come as she pleases.\"","done":false,"p":["","Video","","",""]},{"id":"s6","what":"\"To land her: clench. Snap her off. Shake and sheath.\"","done":false,"p":["","Video","","",""]},{"id":"s7","what":"Turn your upper body toward the camera, arm bent at 90 degrees, and barely lift into a thumbs up","done":false,"p":["","Video","","",""]}]},{"id":"v4-copy-viral","title":"Ever been outside?","desc":"Fake dorm interview: \"Ever been outside before? It's pretty fricking awesome.\"","ref":"","scenes":[{"id":"s1","what":"Set up like a serious interview in the dorm: chair, lamp, plain wall, you looking slightly off camera","done":false,"p":["Landscape","Video","Tripod","Still","Medium"]},{"id":"s2","what":"Deliver totally straight-faced: \"I don't know if you've ever been outside before. But it's pretty fricking awesome.\"","done":false,"p":["","Video","","",""]},{"id":"s3","what":"Optional: hard cut to one gorgeous outdoor clip to land the joke","done":false,"p":["Landscape","Video","","","Wide"]}]},{"id":"v5-copy-viral","title":"Wolf of Wall Street: motivational","desc":"Wolf of Wall Street \"mm hmm\" speech with the words swapped for travel. Over-the-top hype.","ref":"","scenes":[{"id":"s1","what":"Watch the reference clip and note every beat, pause and hand gesture","done":false,"p":["","Video","","",""]},{"id":"s2","what":"Rewrite his lines so they're about travel and adventure (keep the chest thump and \"mm hmm\" rhythm)","done":false,"p":["","Video","","",""]},{"id":"s3","what":"Two of us at a table or overlook acting out the scene, one playing Matthew McConaughey","done":false,"p":["Landscape","Video","","","Medium"]},{"id":"s4","what":"Cut in close-ups on the chest thump and the hum","done":false,"p":["Landscape","Video","","","Close-up"]},{"id":"s5","what":"End on a wide shot of the view behind you","done":false,"p":["Landscape","Video","","","Wide"]}]},{"id":"v6-copy-viral","title":"Wolf of Wall Street: the sale","desc":"POV: convincing your friends to go on the greatest trip of their lives.","ref":"","scenes":[{"id":"s1","what":"Watch the reference clip and match the pacing of the phone call","done":false,"p":["","Video","","",""]},{"id":"s2","what":"Open with on-screen text. Me on the phone leaning back in a chair like a salesman: \"Hey Jonny. I'm calling about an opportunity that could change your life.\"","done":false,"p":["Landscape","Video","","","Medium"]},{"id":"s3","what":"\"Give me 60 seconds of your time Jonny. I promise you will not be disappointed. Can you do that for me?\" Cut to Jonny: \"Yeah.\"","done":false,"p":["Landscape","Video","","","Medium"]},{"id":"s4","what":"\"I'm sitting here looking at the pictures from our last trip. The most beautiful mountains you've seen in your life. Memories you couldn't forget. Friendships that last a lifetime.\"","done":false,"p":["Landscape","Video","","",""]},{"id":"s5","what":"Long pause. \"Are you with me?\" Jonny: \"Yes.\"","done":false,"p":["Landscape","Video","","","Close-up"]},{"id":"s6","what":"\"Now I need you to text the chat and tell them you're in.\" \"Yes I can.\" \"Thank you Jonny! You WILL NOT be disappointed!\"","done":false,"p":["Landscape","Video","","","Medium"]}]},{"id":"v-new1-copy-viral","title":"POV: Camping with a murderer","desc":"Someone in a hood keeps showing up, then charges. Text: POV: Camping with a murderer","ref":"","scenes":[{"id":"s1","what":"Hooded guy staring at us from outside the tent","done":false,"p":["Portrait","Video","","",""]},{"id":"s2","what":"Hooded guy behind a tree","done":false,"p":["Portrait","Video","","",""]},{"id":"s3","what":"Hooded guy standing in the lake","done":false,"p":["Portrait","Video","","",""]},{"id":"s4","what":"He runs at us screaming with something in his hand","done":false,"p":["Portrait","Video","","",""]}]},{"id":"v-new2-copy-viral","title":"POV: Stages of the road trip","desc":"Hype and ready to have fun, the talking stage, sleep, ready for it to end. Text: POV: Stages of the road trip","ref":"","scenes":[{"id":"s1","what":"Stage 1: hype and ready to have fun","done":false,"p":["Portrait","Video","","",""]},{"id":"s2","what":"Stage 2: the talking stage","done":false,"p":["Portrait","Video","","",""]},{"id":"s3","what":"Stage 3: everyone asleep","done":false,"p":["Portrait","Video","","",""]},{"id":"s4","what":"Stage 4: ready for it to end","done":false,"p":["Portrait","Video","","",""]}]},{"id":"v-new3-copy-viral","title":"WOAH! Don't scroll past","desc":"Run around the couch to the camera, \"scroll\" the viewer, land somewhere beautiful. Text: \"WOAH! Don't scroll past.\"","ref":"","scenes":[{"id":"s1","what":"Run from around the couch to the camera: \"Don't scroll past. How do you like it?!\"","done":false,"p":["Portrait","Video","","",""]},{"id":"s2","what":"\"Scroll\" them up and land somewhere beautiful, then scroll left, right","done":false,"p":["Portrait","Video","","",""]}]}]},{"cat":"Kovie Redo videos","videos":[{"id":"v1-kovie","title":"Chair talk","desc":"Sit-down talk to camera with me filling the frame.","ref":"","scenes":[{"id":"s1","what":"Set up the chair so you fill most of the frame. Clean background, good light on your face","done":false,"p":["","Video","Tripod","Still",""]},{"id":"s2","what":"Talk straight to camera. One idea, told like you're talking to one friend","done":false,"p":["","Video","","",""]},{"id":"s3","what":"Grab 2 or 3 cutaways that match what you're saying","done":false,"p":["Portrait","Video","","",""]}]}]},{"cat":"Montage videos","videos":[{"id":"v1-montage","title":"That trip you wish you could relive","desc":"Montage of the trip you wish you could relive. Nostalgic.","ref":"","scenes":[{"id":"s1","what":"Pick one trip and pull the best 15 to 20 clips: people laughing, the view, the car, the campfire","done":false,"p":["","Video","","",""]},{"id":"s2","what":"Open on on-screen text over a wide landscape","done":false,"p":["","Video","","","Wide"]},{"id":"s3","what":"Cut the clips to a nostalgic song, faces first and views second","done":false,"p":["","Video","","",""]},{"id":"s4","what":"End on the group together","done":false,"p":["","Video","","","Medium"]}]},{"id":"v2-montage","title":"A road trip in 10 breaths","desc":"10 clips of breaths across one road trip. Funny and oddly calming.","ref":"","scenes":[{"id":"s1","what":"Throughout the road trip, film 10 short clips of someone taking a big, dramatic breath at each new spot","done":false,"p":["Portrait","Video","","Still",""]},{"id":"s2","what":"Mix up the sounds: \"Aaaah\" \"shuuu\" \"shhh\" \"tsssup\"","done":false,"p":["","Video","","",""]},{"id":"s3","what":"Make sure each clip shows a different place behind them","done":false,"p":["","Video","","",""]},{"id":"s4","what":"Cut them back to back in trip order","done":false,"p":["","Video","","",""]}]}]},{"cat":"Make fun of content creators","videos":[{"id":"v1-make-fun","title":"Run away, walk back","desc":"Parody: I hit play, run off funky, then walk back observing nature.","ref":"","scenes":[{"id":"s1","what":"Set the camera on a tripod at one end of a bridge, like you're about to film a serious nature video","done":false,"p":["Portrait","Video","Tripod","Still","Wide"]},{"id":"s2","what":"Hit play and sprint away across the bridge in a funky, ridiculous run","done":false,"p":["","Video","","",""]},{"id":"s3","what":"Stop, turn, and walk back super slowly and methodically, looking around and observing nature like a documentary host","done":false,"p":["","Video","","",""]}]}]},{"cat":"Acting skills","videos":[{"id":"v1-acting","title":"Look at the view!","desc":"Fake-angry yelling at Jonny to look at the view. Ends on the mountains.","ref":"","scenes":[{"id":"s1","what":"Start the camera tight on my chest and slowly pan up to my face","done":false,"p":["Portrait","Video","","","Close-up"]},{"id":"s2","what":"Yell \"Look at the view!\" while the camera stays stubbornly on me","done":false,"p":["","Video","","",""]},{"id":"s3","what":"\"No really. Look at the view.\" Then \"Look if you're not gonna look at the view you're going in time out.\"","done":false,"p":["","Video","","",""]},{"id":"s4","what":"\"Look at the view Jonny!\"","done":false,"p":["","Video","","","Close-up"]},{"id":"s5","what":"Camera finally swings left, slows down, and pans across the mountain","done":false,"p":["","Video","","Zoom/Pan","Wide"]}]},{"id":"v-new4-acting","title":"Nerd explaining nature","desc":"Act like a nerd in the forest explaining nature. Pairs with the soft background music in your doc.","ref":"","scenes":[{"id":"s1","what":"Nerd narration in the forest","done":false,"p":["Portrait","Video","","",""]}]},{"id":"v-new5-acting","title":"Foreign exchange student","desc":"\"When your friend's foreign exchange student goes on a trip with you.\" Jude plays a straight-laced kid worried about breathing. Text: \"When your friend's foreign exchange student goes on a trip with you\"","ref":"","scenes":[{"id":"s1","what":"Jude worried about breathing","done":false,"p":["Portrait","Video","","",""]}]},{"id":"v-new6-acting","title":"Nerd finds a dead body, casts a spell","desc":"Insert real images of yellow tape etc.","ref":"Google: \"nerd explaining nature\" (saved in your doc)","scenes":[{"id":"s2","what":"Nerd finds the \"body\" and casts a spell to revive it","done":false,"p":["Landscape","Video","","Still",""]},{"id":"s3","what":"Insert shots: yellow tape etc.","done":false,"p":["","Video","","",""]}]},{"id":"v-new7-acting","title":"Hiking with a bird watcher","desc":"The bird watcher gets way too excited, then gives advice on attracting birds. Text: POV: Hiking with a bird watcher","ref":"https://www.instagram.com/reels/DLDOO98J3DW/","scenes":[{"id":"s2","what":"Mid shot belly to head","done":false,"p":["Portrait","Video","","",""]},{"id":"s3","what":"Opposite side, far-away shot","done":false,"p":["Portrait","Video","","","Wide"]},{"id":"s4","what":"Bird watcher gets excited","done":false,"p":["Portrait","Video","","","Close-up"]},{"id":"s5","what":"Bird watcher gives advice on how to attract birds","done":false,"p":["Portrait","Video","","",""]}]},{"id":"v-new8-acting","title":"Naturalist parody","desc":"Make fun of the naturalist reel. No speaking on camera, overlay the audio later.","ref":"https://www.instagram.com/reels/C2DGxg4Rl9X/","scenes":[{"id":"s2","what":"Stare at the camera pointing at a dead tree","done":false,"p":["","Video","Selfie","",""]},{"id":"s3","what":"Stare at the camera pointing at a worm","done":false,"p":["","Video","Selfie","",""]},{"id":"s4","what":"Stare at the camera pointing at an ant","done":false,"p":["","Video","Selfie","",""]}]},{"id":"v-new9-acting","title":"SLUG TIME","desc":"Buddy opens up about feeling sad, gets shushed for a slug. Text: \"Slug time.\"","ref":"Google: \"SLUG TIME\" (saved in your doc)","scenes":[{"id":"s2","what":"Actor 1: \"I've been feeling really sad recently and just want to talk to someone\"","done":false,"p":["Portrait","Video","","",""]},{"id":"s3","what":"Switch viewpoint: several shots of Actor 2's \"shhh\" finger in his face","done":false,"p":["Portrait","Video","","",""]},{"id":"s4","what":"\"What, what is it?\" Actor 2 points: \"Slug time.\"","done":false,"p":["Portrait","Video","","",""]},{"id":"s5","what":"5-second hype edit of the slug","done":false,"p":["","Video","","","Close-up"]},{"id":"s6","what":"Pull back to both admiring the slug: \"Cool slug.\"","done":false,"p":["Portrait","Video","","","Wide"]}]},{"id":"v-new10-acting","title":"Another day in paradise","desc":"One actor, Phil Collins over it, nature keeps beating me up. Text: Text: \"Thanks for experiencing nature with me\"","ref":"Song: Another Day in Paradise, Phil Collins","scenes":[{"id":"s2","what":"Point to beautiful nature","done":false,"p":["Portrait","Video","","",""]},{"id":"s3","what":"Run through a field and fall","done":false,"p":["Portrait","Video","","",""]},{"id":"s4","what":"Sneeze on camera, recover, point out a beautiful plant","done":false,"p":["Portrait","Video","","",""]},{"id":"s5","what":"Laugh, then get cut off by tripping","done":false,"p":["Portrait","Video","","",""]}]}]},{"cat":"Vlogs","videos":[{"id":"v1-vlogs","title":"Mile by mile","desc":"Hike vlog with a quick check-in at every mile.","ref":"","scenes":[{"id":"s1","what":"Mile 1: quick check-in to camera. Where we are, how we feel, one funny thing","done":false,"p":["Portrait","Video","Selfie","Walk",""]},{"id":"s2","what":"Mile 2: same check-in. Show one thing we passed","done":false,"p":["Portrait","Video","Selfie","Walk",""]},{"id":"s3","what":"Mile 3: same check-in. Energy getting lower? Show it","done":false,"p":["Portrait","Video","Selfie","",""]},{"id":"s4","what":"Mile 4: same check-in plus a wide shot of where we are","done":false,"p":["Portrait","Video","","",""]},{"id":"s5","what":"Final mile: the payoff view and the group","done":false,"p":["Portrait","Video","","","Wide"]}]}]},{"cat":"Who we are","videos":[{"id":"v1-who-we-are","title":"Why we're doing this","desc":"Trail Q and A with Alex on why we exist. Ends with a DM invite.","ref":"","scenes":[{"id":"s1","what":"Walking on the trail, I ask the camera: \"Why are we doing this?\"","done":false,"p":["Portrait","Video","Selfie","Walk","Medium"]},{"id":"s2","what":"Swing left to Alex: \"We love people.\"","done":false,"p":["","Video","","Swing","Medium"]},{"id":"s3","what":"Swing right back to me: \"And weren't we trying to solve a problem?\"","done":false,"p":["","Video","","Swing","Medium"]},{"id":"s4","what":"Swing left to Alex: \"Connection and relationships.\"","done":false,"p":["","Video","","Swing","Medium"]},{"id":"s5","what":"I grab the camera, pull it right up to my face: \"So DM us if you wanna venture out!!\"","done":false,"p":["","Video","","","Close-up"]},{"id":"s6","what":"I jump off a cliff into water","done":false,"p":["","Video","","","Wide"]}]}]},{"cat":"Video the camera","videos":[{"id":"v1-video-camera","title":"They say an iPhone's good enough","desc":"\"They say an iPhone's good enough…\" then the real camera photo. Playful flex.","ref":"","scenes":[{"id":"s1","what":"Text on screen sets it up","done":false,"p":["","Video","","",""]},{"id":"s2","what":"iPhone films the back of the real camera's screen as you line up a shot","done":false,"p":["Portrait","Video","","","Close-up"]},{"id":"s3","what":"Camera takes the picture","done":false,"p":["","Video","","",""]},{"id":"s4","what":"Hard cut to the finished photo, full screen","done":false,"p":["","Video","","",""]}]}]},{"cat":"Tell a story","videos":[{"id":"v1-tell-story","title":"5-shot story","desc":"Tell one moment in five shots: where, what, closer, detail, over the shoulder.","ref":"","scenes":[{"id":"s1","what":"WHERE: subject tiny in the frame, show as much landscape as you can","done":false,"p":["","Video","","Still","Wide"]},{"id":"s2","what":"WHAT: something in the foreground, subject closer but still far away, people doing stuff","done":false,"p":["","Video","","",""]},{"id":"s3","what":"MEDIUM SHOT: same action as before, just closer","done":false,"p":["","Video","","","Medium"]},{"id":"s4","what":"CLOSE-UP: one detail highlighted, like hands, a face, or gear","done":false,"p":["","Video","","","Close-up"]},{"id":"s5","what":"OVER THE SHOULDER: put the viewer in the story experiencing it first hand","done":false,"p":["","Video","","",""]}]}]},{"cat":"Fast to the beat","videos":[{"id":"v1-fast-beat","title":"Bang bang bang","desc":"Quick clips of people doing stuff, flipped on every beat. High energy.","ref":"","scenes":[{"id":"s1","what":"Film 8 to 12 short clips of people doing any activity: jumping, throwing, running, high fives","done":false,"p":["","Video","","",""]},{"id":"s2","what":"Make each clip start right on the action","done":false,"p":["","Video","","",""]},{"id":"s3","what":"Flip the clips on every beat (bang, bang, bang)","done":false,"p":["","Video","","",""]}]}]},{"cat":"Random","videos":[{"id":"v1-random","title":"Venture out, please","desc":"Close-up on eyes, then rapid photo flicks ending on \"Venture out, please.\"","ref":"","scenes":[{"id":"s1","what":"Super close-up on someone's eyes, calm and still","done":false,"p":["Landscape","Video","","",""]},{"id":"s2","what":"Cut to extremely fast pictures flicking across the screen","done":false,"p":["","Video","","",""]},{"id":"s3","what":"End on a black screen with text","done":false,"p":["","Video","","",""]}]},{"id":"v2-random","title":"Most beautiful sunset of my life","desc":"Face blasted by sunset light, eyes darting, mouth open. Deadpan joke.","ref":"","scenes":[{"id":"s1","what":"Super close-up on a whole face lit up super bright by the sunset, eyes darting around, mouth open","done":false,"p":["Portrait","Video","","","Close-up"]},{"id":"s2","what":"Text appears on screen","done":false,"p":["","Video","","",""]}]},{"id":"v3-random","title":"Eyes open to nature","desc":"Eyes close, open, camera pulls back to nature, then loops.","ref":"","scenes":[{"id":"s1","what":"Super close-up on someone's eyes, then they slowly close them","done":false,"p":["Landscape","Video","","",""]},{"id":"s2","what":"Eyes open and the camera pulls back to reveal the nature around them","done":false,"p":["","Video","","","Wide"]},{"id":"s3","what":"Swing left (shot 1)","done":false,"p":["","Video","","Swing",""]},{"id":"s4","what":"Swing left (shot 2)","done":false,"p":["","Video","","Swing",""]},{"id":"s5","what":"Swing left (shot 3)","done":false,"p":["","Video","","Swing",""]},{"id":"s6","what":"Swing left and come back right up to their eyes. End and loop","done":false,"p":["","Video","","","Close-up"]}]},{"id":"v4-random","title":"Jubi shuffle slide","desc":"Me wanting to learn the shuffle, then a hard cut to the Tetons.","ref":"","scenes":[{"id":"s1","what":"Frame me explaining I want to learn to shuffle, then I scoot back and start shuffling","done":false,"p":["Landscape","Video","","Still","Medium"]},{"id":"s2","what":"Title text on screen","done":false,"p":["","Video","","",""]},{"id":"s3","what":"Hard transition: same shuffle, but now the Tetons are in the background","done":false,"p":["Landscape","Video","","","Wide"]}]},{"id":"v5-random","title":"I thought I'd stay inside today","desc":"Legs swinging off a cliff-jump ledge, then pan up to the view.","ref":"","scenes":[{"id":"s1","what":"Legs swinging off a ledge at the cliff jumping spot","done":false,"p":["Landscape","Video","","",""]},{"id":"s2","what":"Slowly pan up from the legs to the beautiful background","done":false,"p":["","Video","","","Wide"]}]}]}];
+const KEY = "shotlist.v1";
+let data, open = new Set(), editing = null, armed = null;
+try { data = JSON.parse(localStorage.getItem(KEY)); } catch {}
+if (!data || !Array.isArray(data.cats)) data = {cats: SEED, savedAt: null};
+try { open = new Set(JSON.parse(localStorage.getItem(KEY+".open") || "[]")); } catch {}
+
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,6);
+function save(){ try { localStorage.setItem(KEY, JSON.stringify(data)); } catch { toast("Phone storage is full. Save a backup."); } }
+function saveOpen(){ try { localStorage.setItem(KEY+".open", JSON.stringify([...open])); } catch {} }
+function toast(m){ $("#toast").innerHTML = `<div class="toast">${esc(m)}</div>`; clearTimeout(toast.t); toast.t = setTimeout(()=>$("#toast").innerHTML="", 1800); }
+const allVids = () => data.cats.flatMap(c => c.videos);
+const findVid = id => allVids().find(v => v.id === id);
+
+function render(){
+  const sc = allVids().flatMap(v => v.scenes), done = sc.filter(s => s.done).length;
+  $("#prog").innerHTML = `<div class="row"><span>${done} of ${sc.length} shots filmed</span><span>${allVids().filter(v=>v.scenes.length && v.scenes.every(s=>s.done)).length} videos done</span></div><div class="bar"><i style="width:${sc.length?Math.round(done/sc.length*100):0}%"></i></div>`;
+  $("#list").innerHTML = data.cats.filter(c => c.videos.length).map(c => {
+    const o = open.has("c:"+c.cat);
+    return `<div class="cat ${o?"open":""}"><button class="cathead" data-cat="${esc(c.cat)}"><span>${esc(c.cat)} · ${c.videos.length}</span><span class="chev">›</span></button>
+      ${o ? c.videos.map(vidHTML).join("") : ""}</div>`;
+  }).join("");
+  if (editing){ const t = document.getElementById("edit"); if (t){ t.focus(); t.setSelectionRange(t.value.length, t.value.length); } }
+}
+function vidHTML(v){
+  const o = open.has("v:"+v.id), d = v.scenes.filter(s=>s.done).length;
+  return `<div class="vid ${o?"open":""}">
+    <button class="vhead" data-vid="${v.id}"><span class="t">${esc(v.title)}</span><span class="cnt ${v.scenes.length&&d===v.scenes.length?"all":""}">${d}/${v.scenes.length}</span><span class="chev">›</span></button>
+    ${o ? `<div class="vbody">
+      ${v.desc ? `<p class="desc">${esc(v.desc)}</p>` : ""}
+      ${v.ref ? `<div class="ref">Ref: ${esc(v.ref)}</div>` : ""}
+      ${v.scenes.map((s,i) => sceneHTML(v,s,i)).join("")}
+      <button class="add" data-addscene="${v.id}">+ Add scene</button>
+      <div class="vtools"><span></span><button class="link red ${armed==="v:"+v.id?"arm":""}" data-delvid="${v.id}">${armed==="v:"+v.id?"Tap again to delete video":"Delete video"}</button></div>
+    </div>` : ""}
+  </div>`;
+}
+function sceneHTML(v,s,i){
+  const key = v.id+"|"+s.id, ed = editing === key;
+  return `<div class="scene ${s.done?"done":""}">
+    <div class="srow">
+      <button class="box" data-check="${key}" aria-label="Filmed">${s.done?"✓":""}</button>
+      ${ed ? `<textarea class="what" id="edit" data-key="${key}" rows="3">${esc(s.what)}</textarea>`
+           : `<div class="what" data-edit="${key}">${esc(s.what)}</div>`}
+      <button class="x ${armed===key?"arm":""}" data-delscene="${key}" aria-label="Delete scene">${armed===key?"Delete?":"×"}</button>
+    </div>
+    <div class="pills">${PILLS.map(([label,opts],k) => `<button class="pill ${s.p[k]?"on":""}" data-pill="${key}|${k}">${esc(s.p[k] || label)}</button>`).join("")}</div>
+  </div>`;
+}
+function sceneOf(key){ const [vid,sid] = key.split("|"); const v = findVid(vid); return [v, v?.scenes.find(s=>s.id===sid)]; }
+function commitEdit(){
+  const t = document.getElementById("edit"); if (!t) { editing = null; return; }
+  const [, s] = sceneOf(t.dataset.key); if (s){ s.what = t.value.trim(); save(); }
+  editing = null;
+}
+
+document.addEventListener("click", e => {
+  const b = e.target.closest("button, [data-edit]"); if (!b) return;
+  const d = b.dataset;
+  if (editing && !b.closest("#edit")) commitEdit();
+  if (!d.delscene && !d.delvid) armed = null;
+  if (d.cat){ const k="c:"+d.cat; open.has(k)?open.delete(k):open.add(k); saveOpen(); }
+  else if (d.vid){ const k="v:"+d.vid; open.has(k)?open.delete(k):open.add(k); saveOpen(); }
+  else if (d.check){ const [,s]=sceneOf(d.check); s.done=!s.done; save(); if (s.done) toast("Got it ✓"); }
+  else if (d.pill){ const [vid,sid,k]=d.pill.split("|"); const [,s]=sceneOf(vid+"|"+sid); const opts=PILLS[k][1]; const i=opts.indexOf(s.p[k]); s.p[k] = i===opts.length-1 ? "" : opts[i+1]; save(); }
+  else if (d.edit){ editing = d.edit; }
+  else if (d.addscene){ const v=findVid(d.addscene); const last=v.scenes[v.scenes.length-1]; const s={id:uid(),what:"",done:false,p:[last?.p[0]||"",last?.p[1]||"Video","","",""]}; v.scenes.push(s); save(); editing=v.id+"|"+s.id; }
+  else if (d.delscene){ if (armed!==d.delscene){ armed=d.delscene; } else { const [v,s]=sceneOf(d.delscene); v.scenes=v.scenes.filter(x=>x!==s); armed=null; save(); toast("Scene deleted"); } }
+  else if (d.delvid){ const k="v:"+d.delvid; if (armed!==k){ armed=k; } else { data.cats.forEach(c=>c.videos=c.videos.filter(v=>v.id!==d.delvid)); armed=null; save(); toast("Video deleted"); } }
+  else return;
+  render();
+});
+document.addEventListener("keydown", e => { if (e.target.id==="edit" && e.key==="Enter" && !e.shiftKey){ e.preventDefault(); commitEdit(); render(); } });
+document.addEventListener("focusout", e => { if (e.target.id==="edit") setTimeout(()=>{ if (editing){ commitEdit(); render(); } }, 150); });
+
+// new video
+$("#newVidBtn").onclick = () => {
+  if ($("#newVid").innerHTML){ $("#newVid").innerHTML=""; return; }
+  $("#newVid").innerHTML = `<div class="newvid"><input id="nvTitle" placeholder="Video title" autocomplete="off">
+    <select id="nvCat">${data.cats.map(c=>`<option>${esc(c.cat)}</option>`).join("")}<option value="__new">+ New category…</option></select>
+    <input id="nvNewCat" placeholder="New category name" hidden>
+    <button class="btn" id="nvAdd">Add video</button></div>`;
+  $("#nvCat").onchange = () => $("#nvNewCat").hidden = $("#nvCat").value !== "__new";
+  $("#nvAdd").onclick = () => {
+    const title = $("#nvTitle").value.trim(); if (!title){ toast("Give it a title"); return; }
+    let name = $("#nvCat").value; if (name==="__new") name = $("#nvNewCat").value.trim() || "Ideas";
+    let cat = data.cats.find(c=>c.cat===name); if (!cat){ cat={cat:name,videos:[]}; data.cats.push(cat); }
+    const v = {id:uid(), title, desc:"", ref:"", scenes:[{id:uid(),what:"",done:false,p:["Portrait","Video","","",""]}]};
+    cat.videos.unshift(v); open.add("c:"+name); open.add("v:"+v.id); saveOpen(); save();
+    $("#newVid").innerHTML = ""; editing = v.id+"|"+v.scenes[0].id; render(); toast("Video added");
+  };
+  $("#nvTitle").focus();
+};
+
+// backup / restore
+$("#backup").onclick = async () => {
+  const name = `shot-list-backup-${new Date().toISOString().slice(0,10)}.json`;
+  const blob = new Blob([JSON.stringify(data)], {type:"application/json"});
+  const file = new File([blob], name, {type:"application/json"});
+  try {
+    if (navigator.canShare && navigator.canShare({files:[file]})) { await navigator.share({files:[file], title:"Shot List backup"}); return; }
+  } catch (e) { if (e.name==="AbortError") return; }
+  const a = document.createElement("a"); a.href = URL.createObjectURL(blob); a.download = name; a.click();
+};
+$("#restore").onchange = async e => {
+  const f = e.target.files[0]; if (!f) return;
+  try { const d = JSON.parse(await f.text()); if (!Array.isArray(d.cats)) throw 0; data = d; save(); render(); toast("Backup restored"); }
+  catch { toast("That file isn't a Shot List backup"); }
+  e.target.value = "";
+};
+
+function net(){ const on = navigator.onLine; $("#net").className = "net"+(on?"":" off"); $("#net span").textContent = on ? "Online" : "Offline · still works"; }
+addEventListener("online", net); addEventListener("offline", net); net();
+render();
+if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
+})();
+</script>
+</body>
+</html>
