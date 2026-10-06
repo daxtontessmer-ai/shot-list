@@ -94,7 +94,14 @@ try { open = new Set(JSON.parse(localStorage.getItem(KEY+".open") || "[]")); } c
 const $ = s => document.querySelector(s);
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,6);
-function save(){ try { localStorage.setItem(KEY, JSON.stringify(data)); } catch { toast("Phone storage is full. Save a backup."); } }
+// Two copies on the phone: localStorage (instant) + IndexedDB (backup copy).
+const idb = () => new Promise((ok, no) => { const r = indexedDB.open("shotlist", 1);
+  r.onupgradeneeded = () => r.result.createObjectStore("kv"); r.onsuccess = () => ok(r.result); r.onerror = () => no(r.error); });
+async function idbPut(v){ try { const db = await idb(); db.transaction("kv","readwrite").objectStore("kv").put(v, KEY); } catch {} }
+async function idbGet(){ try { const db = await idb(); return await new Promise(ok => { const q = db.transaction("kv").objectStore("kv").get(KEY); q.onsuccess = () => ok(q.result); q.onerror = () => ok(null); }); } catch { return null; } }
+function save(){ data.savedAt = Date.now(); const j = JSON.stringify(data);
+  try { localStorage.setItem(KEY, j); } catch { toast("Phone storage is full. Save a backup."); }
+  idbPut(j); }
 function saveOpen(){ try { localStorage.setItem(KEY+".open", JSON.stringify([...open])); } catch {} }
 function toast(m){ $("#toast").innerHTML = `<div class="toast">${esc(m)}</div>`; clearTimeout(toast.t); toast.t = setTimeout(()=>$("#toast").innerHTML="", 1800); }
 const allVids = () => data.cats.flatMap(c => c.videos);
@@ -200,6 +207,10 @@ $("#restore").onchange = async e => {
 function net(){ const on = navigator.onLine; $("#net").className = "net"+(on?"":" off"); $("#net span").textContent = on ? "Online" : "Offline · still works"; }
 addEventListener("online", net); addEventListener("offline", net); net();
 render();
+// If the quick copy was ever lost, bring back the backup copy.
+idbGet().then(j => { try { const d = JSON.parse(j); if (d && Array.isArray(d.cats) && (d.savedAt||0) > (data.savedAt||0)) { data = d; localStorage.setItem(KEY, j); render(); } else if (data.savedAt) idbPut(JSON.stringify(data)); } catch {} });
+if (navigator.storage && navigator.storage.persist) navigator.storage.persist().catch(()=>{});
+addEventListener("pagehide", () => { try { localStorage.setItem(KEY, JSON.stringify(data)); } catch {} });
 if ("serviceWorker" in navigator) navigator.serviceWorker.register("sw.js").catch(()=>{});
 })();
 </script>
