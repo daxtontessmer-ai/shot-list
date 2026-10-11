@@ -493,6 +493,41 @@ const chatGPTVideoIdeas = [
     "DIRECTOR TWO — At a legal scenic stop, next friend demands an overcomplicated jumping pose. Show three failed attempts before the least-bad photo lands in the grid.",
     "TIRED DIRECTOR — Late in the drive, a friend simply says, 'Sit wherever.' The candid result becomes the best image. Keep the car parked and stay clear of traffic.",
     "PAYOFF — At arrival, reveal all five photos in route order. The group chooses the imperfect candid as the trip cover. Text: 'Nobody needed a professional pose.'"
+  ]),
+  scriptedIdea("chatgpt-trunk-final-cuts", "What Survived the Trunk Final Cut", "Make limited trunk space a mock elimination show where every bulky item must justify the drive.", [
+    "HOOK — Line questionable items beside the empty trunk: giant pillow, extra shoes, cooler, guitar. Daxton says, 'Not everybody is making this trip.' Add elimination-show music.",
+    "AUDITIONS — Each owner gets five seconds to defend one item. Dialogue examples: 'The pillow is morale' and 'Those are emergency sneakers.' Show item weight and space honestly.",
+    "PACKING TEST — Load essentials first, then try each contestant in the remaining space. Film from the same tripod angle and use a buzzer whenever the trunk will not close.",
+    "FINAL VOTE — Friends point to the last item that stays. The owner of the rejected item gives a dramatic goodbye while returning it safely inside the house.",
+    "PAYOFF — At camp, reveal everyone borrowing the winning giant pillow. Text: 'First pick. Immediate impact.' Leave the campsite and car organized."
+  ]),
+  scriptedIdea("chatgpt-aux-election", "The First Aux-Cord Election", "Choose the opening road-trip song through a parking-lot campaign that immediately exposes everyone's music personality.", [
+    "HOOK — Beside the parked car, hold up the audio cable or phone: 'This controls the first hour.' Three friends step forward like candidates.",
+    "CAMPAIGN ADS — Each candidate gets one fast pitch beside the trunk: throwbacks, calm morning music, or aggressive wake-up songs. Add a fake slogan under each name.",
+    "DEBATE — Ask one question: 'What happens when everyone hates your third song?' Capture defensive answers and reaction shots while the vehicle remains parked.",
+    "SECRET BALLOT — Everyone drops a folded song title into a cup. Count votes on the hood, show the winning title, and queue it before departure.",
+    "PAYOFF — Ten minutes later, passenger safely records every person singing the losing song instead. Text: 'Popular vote overturned by the chorus.'"
+  ]),
+  scriptedIdea("chatgpt-souvenir-relay", "The One-Dollar Souvenir Relay", "Buy or find one permitted low-cost memento at selected stops and pass it through matching transitions.", [
+    "HOOK — At the first store, show a one-dollar budget and choose a harmless postcard or sticker. Text: 'One tiny souvenir carries the whole route.' Hide payment details.",
+    "FIRST HANDOFF — Hold the item at center frame, pass it right, and end when a hand covers the lens. Reopen at the next parked stop with a different friend completing the motion.",
+    "STOP STORIES — Each holder says one sentence about the current place before passing it onward. Keep signs, weather, and changing clothing visible behind them.",
+    "RULES — Use only purchased or permitted objects; never remove rocks, plants, wildlife items, or cultural artifacts. Keep receipts and pack out all packaging.",
+    "PAYOFF — Final handoff lands at the Tetons. Put the memento into the trip notebook beside the route and write the date. Text: 'Small object, long way.'"
+  ]),
+  scriptedIdea("chatgpt-passenger-news", "Passenger Seat News Network", "Turn safe parked check-ins into increasingly tired news reports about the group's actual road-trip conditions.", [
+    "HOOK — Before departure, passenger holds a phone like a microphone: 'Good morning. Conditions are optimistic with a 90 percent chance of snacks.' Show the packed car.",
+    "TRAFFIC DESK — At the first safe stop, report the harmless delay, miles remaining, and current driver. Use a paper map graphic without revealing live personal location details.",
+    "WEATHER DESK — At another parked stop, a friend reports wind or rain while their hood blows around. Include a practical note about layers or adjusted plans.",
+    "BREAKING NEWS — Announce a spilled snack, playlist dispute, or restroom request with absurd seriousness. Recreate details only while parked and never distract the driver.",
+    "PAYOFF — At arrival, reporter begins another speech, looks at the view, and says, 'Back to you.' Lower the microphone and hold the landscape in natural sound."
+  ]),
+  scriptedIdea("chatgpt-arrival-inventory", "Everything That Changed Before Arrival", "Repeat a simple five-item inventory at departure and destination to reveal the trip's honest transformation.", [
+    "HOOK — In Fayetteville, place five items on the hood: clean shoes, full water bottle, folded map, sealed snack, and car keys. Text: 'Check these again at arrival.'",
+    "DEPARTURE DETAILS — Film one clean close-up of each item and its owner. Add starting mileage, time, and group energy without showing addresses or sensitive information.",
+    "MIDPOINT CHECK — At a safe stop, repeat the lineup: dusty shoes, half water, creased map, crumbs, keys with a gas receipt. Keep camera height identical.",
+    "HUMAN CHECK — Ask each owner for one word now versus departure. Cut 'ready' to 'tired,' 'organized' to 'hungry,' and one unchanged 'excited.'",
+    "PAYOFF — At the destination, arrange the five used items against the view. Friends walk past them toward the trail. Text: 'Nothing stayed perfect. We still arrived.'"
   ])
 ];
 
