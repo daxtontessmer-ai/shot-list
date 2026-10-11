@@ -1,5 +1,5 @@
 // Saves the app on the phone so it opens with no internet.
-const VERSION = "shotlist-v16";
+const VERSION = "shotlist-v17";
 const FILES = ["./", "index.html", "chatgpt-ideas.js", "manifest.webmanifest", "icon-180.png", "icon-192.png", "icon-512.png"];
 
 self.addEventListener("install", e => {
