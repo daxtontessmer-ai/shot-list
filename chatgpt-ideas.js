@@ -1,3 +1,8 @@
+const scriptedIdea = (id, title, desc, scenes) => ({
+  id, title, desc, ref: "Original format: repeated road-trip structure + honest group comedy + practical payoff",
+  scenes: scenes.map((what, index) => ({id:`${id}-${index + 1}`, what, done:false, p:["Portrait","Video","Friend","Still",index === scenes.length - 1 ? "Wide" : "Medium"]}))
+});
+
 const chatGPTVideoIdeas = [
   {
     id: "chatgpt-daxton-class-to-tetons",
@@ -218,7 +223,207 @@ const chatGPTVideoIdeas = [
       {id:"chatgpt-swap-4",what:"RUNNING JOKE — The same passenger exits at every swap asking, 'Are we there?' Background progresses from Fayetteville parking lot to plains to foothills. Each driver answers a flatter version of 'No.'",done:false,p:["Portrait","Video","Friend","Still","Wide"]},
       {id:"chatgpt-swap-5",what:"PAYOFF — Final handoff at the Tetons overlook. New driver catches the keys, looks at the destination, then hands them back: 'I think we walk from here.' Pull focus from keys to mountains and end on the group leaving the car.",done:false,p:["Portrait","Video","Tripod","Zoom/Pan","Wide"]}
     ]
-  }
+  },
+  {
+    id: "chatgpt-dashboard-bingo",
+    title: "Road Trip Dashboard Bingo",
+    desc: "Give the group a bingo card of ordinary road-trip moments and let the real drive complete the story.",
+    ref: "Original format: interactive checklist + candid payoff + recurring visual counter",
+    scenes: [
+      {id:"chatgpt-bingo-1",what:"HOOK — Before leaving, hold a handwritten bingo card to camera: missed exit, weird roadside statue, driver sings alone, emergency bathroom request, snack spill. Daxton: 'First person to five picks the campsite dinner.'",done:false,p:["Portrait","Video","Tripod","Still","Close-up"]},
+      {id:"chatgpt-bingo-2",what:"SETUP — Film each friend choosing one square they guarantee will happen. Add their name beside it. Capture the packed car and clock so the game starts with the actual departure.",done:false,p:["Portrait","Video","Friend","Still","Medium"]},
+      {id:"chatgpt-bingo-3",what:"DRIVE MONTAGE — Passengers capture each safe moment from their seats or while stopped. Freeze briefly, stamp the matching square, and keep a running board in the corner. Never ask the driver to film.",done:false,p:["Portrait","Video","Friend","Still","Medium"]},
+      {id:"chatgpt-bingo-4",what:"FALSE WIN — Someone shouts 'Bingo!' at a fuel stop. Group checks the card and rejects 'saw a cow' because it was a billboard. Add referee whistle and reverse the celebration.",done:false,p:["Portrait","Video","Tripod","Still","Wide"]},
+      {id:"chatgpt-bingo-5",what:"PAYOFF — Final square happens near arrival when everyone says 'Whoa' at the same view. Winner circles it quietly and chooses cheap camp tacos. Text: 'The ordinary parts were the trip too.'",done:false,p:["Portrait","Video","Friend","Zoom/Pan","Wide"]}
+    ]
+  },
+  {
+    id: "chatgpt-state-line-costume",
+    title: "State-Line Outfit Changes",
+    desc: "Use safe parked state-line or welcome-center stops for a wardrobe transition that tracks weather and distance.",
+    ref: "Original format: repeated jump cut + geographic chapters + escalating costume practicality",
+    scenes: [
+      {id:"chatgpt-state-1",what:"HOOK — Park safely at the first welcome center. Daxton jumps in front of the sign wearing Fayetteville clothes. Text: 'One jump for every state.'",done:false,p:["Portrait","Video","Tripod","Still","Wide"]},
+      {id:"chatgpt-state-2",what:"MATCH RULE — Keep tripod height, body position, jump direction, and backpack identical at every stop. Cut at the highest point so each landing reveals a new sign and outfit layer.",done:false,p:["Portrait","Video","Tripod","Still","Medium"]},
+      {id:"chatgpt-state-3",what:"ESCALATION — Start with T-shirt, then hoodie, rain shell, beanie, and finally absurd blanket. Let hair, tired eyes, and dirty shoes show the real passage of time.",done:false,p:["Portrait","Video","Tripod","Still","Medium"]},
+      {id:"chatgpt-state-4",what:"GROUP VERSION — At one stop everyone jumps except the friend asleep in the car. At the next stop that friend appears fully energized while everyone else barely leaves the ground.",done:false,p:["Portrait","Video","Friend","Still","Wide"]},
+      {id:"chatgpt-state-5",what:"PAYOFF — Final jump lands at the Tetons trailhead, but Daxton is overdressed in sunshine. Friend removes the blanket and says, 'You can stop becoming Wyoming now.'",done:false,p:["Portrait","Video","Tripod","Still","Wide"]}
+    ]
+  },
+  {
+    id: "chatgpt-stop-interviews",
+    title: "How Is the Trip Going? Stop Interviews",
+    desc: "Ask the same five-second question at each stop and let confidence unravel into honest road-trip comedy.",
+    ref: "Original format: repeated interview prompt + time progression + authentic group chemistry",
+    scenes: [
+      {id:"chatgpt-interview-1",what:"HOOK — Before departure, hold a pretend microphone beside the packed car. Ask each friend: 'How is the trip going?' Everyone answers too confidently even though the car has not moved.",done:false,p:["Portrait","Video","Friend","Still","Medium"]},
+      {id:"chatgpt-interview-2",what:"FIRST STOP — Ask the identical question at fuel. Answers stay short: 'Great.' 'Hungry.' 'Why is he driving barefoot?' Keep the same framing and microphone hand.",done:false,p:["Portrait","Video","Friend","Still","Medium"]},
+      {id:"chatgpt-interview-3",what:"NIGHT STOP — Film under safe parking-lot light. One friend answers while half asleep; another gives an overly detailed weather report. Add stop number and miles remaining.",done:false,p:["Portrait","Video","Friend","Still","Close-up"]},
+      {id:"chatgpt-interview-4",what:"MORNING STOP — Ask again with everyone holding coffee. Leave in the pause before answers. Someone finally says, 'Ask after the bathroom.' Do not film near restroom entrances.",done:false,p:["Portrait","Video","Friend","Still","Medium"]},
+      {id:"chatgpt-interview-5",what:"PAYOFF — Ask at the first mountain view. Friends ignore the microphone and look outward. After two seconds someone says, 'Okay, now it is going.' End on natural sound.",done:false,p:["Portrait","Video","Friend","Zoom/Pan","Wide"]}
+    ]
+  },
+  {
+    id: "chatgpt-roadside-jury",
+    title: "The Roadside Attraction Jury",
+    desc: "Let the group vote on one strange roadside stop, then judge whether the detour deserved its time.",
+    ref: "Original format: group decision + detour mini-story + verdict payoff",
+    scenes: [
+      {id:"chatgpt-jury-1",what:"HOOK — Passenger shows a roadside-attraction sign while parked. Daxton: 'This will add twenty-two minutes. Court is in session.' Put a visible timer and route estimate on screen.",done:false,p:["Portrait","Video","Friend","Still","Close-up"]},
+      {id:"chatgpt-jury-2",what:"OPENING ARGUMENTS — One friend gets five seconds for the detour: 'Largest prairie dog. Historic. Probably life-changing.' Another argues: 'We have mountains to reach.'",done:false,p:["Portrait","Video","Tripod","Still","Medium"]},
+      {id:"chatgpt-jury-3",what:"VOTE — Everyone points left for stop or right for continue. Losing side groans. Capture the actual turn from a passenger-held camera without distracting the driver.",done:false,p:["Portrait","Video","Friend","Still","Wide"]},
+      {id:"chatgpt-jury-4",what:"EVIDENCE — Film three specific details at the attraction: entrance sign, group reaction, strangest object. Keep this chapter under six seconds and show the actual added time.",done:false,p:["Portrait","Video","Friend","Walk","Medium"]},
+      {id:"chatgpt-jury-5",what:"VERDICT — Back at the car, each person gives one word. End on 'Worth it' or 'Never again,' then show the object shrinking through the rear window as the trip continues.",done:false,p:["Portrait","Video","Friend","Still","Wide"]}
+    ]
+  },
+  {
+    id: "chatgpt-car-cleanliness-timeline",
+    title: "The Car Gets Progressively Worse",
+    desc: "Repeat the same clean-car shot at every stop as snacks, blankets, receipts, and tired passengers slowly take over.",
+    ref: "Original format: locked-frame degradation + visual continuity + cleanup reversal",
+    scenes: [
+      {id:"chatgpt-mess-1",what:"HOOK — Before loading, film the perfectly clean back seat from the open door. Daxton says, 'We are keeping it clean this time.' Hold on every friend nodding seriously.",done:false,p:["Portrait","Video","Tripod","Still","Wide"]},
+      {id:"chatgpt-mess-2",what:"REPEATABLE SHOT — At every stop, park safely and film the same open-door angle for one second. First add one bottle, then blanket, wrappers, shoes, maps, and sleeping people.",done:false,p:["Portrait","Video","Tripod","Still","Wide"]},
+      {id:"chatgpt-mess-3",what:"BLAME GAME — At the third stop, interview each person beside the mess. Everyone points to someone else. Cut answers rapidly: 'Not mine.' 'Never seen it.' 'That receipt was here already.'",done:false,p:["Portrait","Video","Friend","Still","Medium"]},
+      {id:"chatgpt-mess-4",what:"BREAKING POINT — One passenger opens the door and a pillow or empty bottle falls out. Add nature-documentary narration: 'The vehicle can no longer contain its ecosystem.'",done:false,p:["Portrait","Video","Tripod","Still","Medium"]},
+      {id:"chatgpt-mess-5",what:"PAYOFF — At arrival, reverse the montage as everyone cleans together. End on the original clean frame, then one hidden wrapper falls from above. Text: 'Almost left no trace.'",done:false,p:["Portrait","Video","Tripod","Still","Wide"]}
+    ]
+  },
+  {
+    id: "chatgpt-playlist-treaty",
+    title: "The Road Trip Playlist Peace Treaty",
+    desc: "Document the group negotiating music before departure, then reveal how quickly every rule collapses.",
+    ref: "Original format: mock diplomacy + recurring rule violations + singalong payoff",
+    scenes: [
+      {id:"chatgpt-music-1",what:"HOOK — Around the packed car, Daxton presents a handwritten 'Playlist Peace Treaty.' Rule one: everyone gets three songs. Rule two: no skipping before the chorus. Everyone signs too seriously.",done:false,p:["Portrait","Video","Tripod","Still","Medium"]},
+      {id:"chatgpt-music-2",what:"FIRST VIOLATION — Passenger presses play, another hand immediately reaches to skip, and the group shouts 'Treaty!' Freeze on the guilty hand with a red warning graphic.",done:false,p:["Portrait","Video","Friend","Still","Close-up"]},
+      {id:"chatgpt-music-3",what:"GENRE BORDER — At a safe stop, interview each person about the current song. Answers: 'Too sad,' 'Not sad enough,' and 'This is eleven minutes long.'",done:false,p:["Portrait","Video","Friend","Still","Medium"]},
+      {id:"chatgpt-music-4",what:"COLLAPSE — Passenger safely records everyone arguing over one chorus while the driver keeps attention forward. Add scoreboard: skips, vetoes, and unauthorized repeats.",done:false,p:["Portrait","Video","Friend","Still","Wide"]},
+      {id:"chatgpt-music-5",what:"PAYOFF — Near arrival, the most rejected song returns and everyone unexpectedly sings it. Text: 'Treaty broken. Group intact.' End on the real laughter after the chorus.",done:false,p:["Portrait","Video","Friend","Still","Wide"]}
+    ]
+  },
+  {
+    id: "chatgpt-weather-wardrobe-relay",
+    title: "The Weather Wardrobe Relay",
+    desc: "Use clothing handoffs at parked stops to show the drive changing from Arkansas warmth to mountain cold.",
+    ref: "Original format: prop handoff + weather progression + practical packing comedy",
+    scenes: [
+      {id:"chatgpt-weather-1",what:"HOOK — Fayetteville driveway. Friend tosses Daxton sunglasses across frame. He catches them wearing a T-shirt. Text: 'Packing for every forecast except the correct one.'",done:false,p:["Portrait","Video","Tripod","Still","Medium"]},
+      {id:"chatgpt-weather-2",what:"HANDOFF RULE — At each parked stop, throw one clothing item in the same direction: hoodie, rain shell, beanie, gloves. Match the catch and body position across every cut.",done:false,p:["Portrait","Video","Tripod","Still","Medium"]},
+      {id:"chatgpt-weather-3",what:"WRONG CHOICES — Show one friend in shorts during rain and another wearing a coat in sunshine. Each insists, 'I checked the weather.' Add actual temperature text.",done:false,p:["Portrait","Video","Friend","Still","Wide"]},
+      {id:"chatgpt-weather-4",what:"BORROWING — At a windy overlook, friends silently trade layers until nobody wears their own clothes. Close-ups identify each borrowed item by owner.",done:false,p:["Portrait","Video","Friend","Still","Close-up"]},
+      {id:"chatgpt-weather-5",what:"PAYOFF — Tetons reveal: Daxton catches the final jacket, puts it on, and says, 'Okay, this one was necessary.' Wind immediately steals the hood. End on laughter.",done:false,p:["Portrait","Video","Friend","Zoom/Pan","Wide"]}
+    ]
+  },
+  {
+    id: "chatgpt-pump-predictions",
+    title: "Predictions at Every Gas Pump",
+    desc: "Ask one practical or ridiculous prediction at each fuel stop, then score everyone at arrival.",
+    ref: "Original format: repeated question + journey callbacks + final scoreboard",
+    scenes: [
+      {id:"chatgpt-predict-1",what:"HOOK — First fuel stop. Beside the parked car, ask: 'What goes wrong before the next tank?' Predictions: missed exit, spilled drink, or everyone asleep.",done:false,p:["Portrait","Video","Friend","Still","Medium"]},
+      {id:"chatgpt-predict-2",what:"RECEIPT BOARD — Write predictions on the back of each receipt and place them safely in an envelope. Show fuel cost and mileage without card or personal details.",done:false,p:["Portrait","Video","Tripod","Still","Close-up"]},
+      {id:"chatgpt-predict-3",what:"RESULT — Passenger records the harmless prediction coming true, or restage it while parked. Stamp the receipt 'correct' with a sound effect.",done:false,p:["Portrait","Video","Friend","Still","Medium"]},
+      {id:"chatgpt-predict-4",what:"ESCALATION — Later predictions become specific: 'Jonny buys another hat' or 'Daxton says we are almost there.' Cut directly to the evidence at the next stop.",done:false,p:["Portrait","Video","Friend","Still","Medium"]},
+      {id:"chatgpt-predict-5",what:"PAYOFF — At arrival, read the winning predictions beside the view. Winner says, 'I predicted mountains.' Group rejects it. Final scoreboard awards 'least wrong.'",done:false,p:["Portrait","Video","Tripod","Still","Wide"]}
+    ]
+  },
+  {
+    id: "chatgpt-postcard-stops",
+    title: "Postcards We Never Sent",
+    desc: "Create one candid moving postcard at every stop using a fixed five-second recipe.",
+    ref: "Original format: repeated micro-documentary + handwritten captions + cumulative travel diary",
+    scenes: [
+      {id:"chatgpt-card-1",what:"HOOK — Before departure, show five blank postcards. Text: 'One honest postcard from every stop.' Write 'Fayetteville: packed too much' over loading footage.",done:false,p:["Portrait","Video","Tripod","Still","Close-up"]},
+      {id:"chatgpt-card-2",what:"FIVE-SECOND RECIPE — At each safe stop record: one wide place shot, one face, one weird detail, and one handwritten sentence. Keep clips candid rather than posing everyone.",done:false,p:["Portrait","Video","Friend","Walk","Wide"]},
+      {id:"chatgpt-card-3",what:"FOOD CARD — Film the table, first bite, receipt, and somebody trading food. Caption: 'Somewhere in Kansas: ordered by pointing.'",done:false,p:["Portrait","Video","Friend","Still","Medium"]},
+      {id:"chatgpt-card-4",what:"NIGHT CARD — Under safe parking-lot light, capture headlights, tired eyes, coffee, and the route. Caption: 'Still friends. Barely awake.'",done:false,p:["Portrait","Video","Friend","Still","Close-up"]},
+      {id:"chatgpt-card-5",what:"PAYOFF — At the Tetons, fan every postcard toward the lens, then lower them to reveal the group. Final caption: 'Wish you had come. Come next time.'",done:false,p:["Portrait","Video","Tripod","Zoom/Pan","Wide"]}
+    ]
+  },
+  {
+    id: "chatgpt-before-after-portraits",
+    title: "Before-and-After Car Portraits",
+    desc: "Repeat one group portrait before departure and after arrival so the journey writes the joke itself.",
+    ref: "Original format: identical composition + visible time passage + human payoff",
+    scenes: [
+      {id:"chatgpt-portrait-1",what:"HOOK — Clean car in Fayetteville. Tripod portrait with everyone standing by assigned door, bags hidden, clothes clean, forced smiles perfect. Text: 'Before twelve hours together.'",done:false,p:["Portrait","Video","Tripod","Still","Wide"]},
+      {id:"chatgpt-portrait-2",what:"POSITION MAP — Photograph foot positions and tripod height so the composition can be recreated. Have each person choose one pose they must maintain at every stop.",done:false,p:["Portrait","Photo","Tripod","Still","Wide"]},
+      {id:"chatgpt-portrait-3",what:"MIDPOINT — Recreate the portrait at a fuel stop: one person missing, another eating, driver stretching, car visibly messier. Text: 'Halfway. Formation compromised.'",done:false,p:["Portrait","Video","Tripod","Still","Wide"]},
+      {id:"chatgpt-portrait-4",what:"PRE-ARRIVAL — Repeat at the final stop with hoodies, tired faces, and borrowed pillows. Let nobody fix hair or clean the car.",done:false,p:["Portrait","Video","Tripod","Still","Wide"]},
+      {id:"chatgpt-portrait-5",what:"PAYOFF — Tetons portrait uses identical positions, but smiles are real and everyone faces the view after one second. Swipe between first and final frames. Text: 'Same people. Better background.'",done:false,p:["Portrait","Video","Tripod","Still","Wide"]}
+    ]
+  },
+  scriptedIdea("chatgpt-forgotten-roll-call", "The Forgotten Item Roll Call", "A departure roll call where every claimed essential returns as a joke at later stops.", [
+    "HOOK — Beside the open trunk, Daxton calls out: 'Wallet, water, tent, dignity?' Friends answer yes until dignity gets silence. Show a handwritten checklist and packed car.",
+    "FALSE CONFIDENCE — Each friend holds up the item they were assigned. One person presents something almost correct, like a phone cable without the charging block. Label roles on screen.",
+    "FIRST CALLBACK — At the first fuel stop, someone asks for the missing item. Cut back to their confident departure answer, then return to the group's stare. Buy or improvise only what is genuinely needed.",
+    "ESCALATION — Repeat at food and rest stops with harmless items: spoon, sunglasses, pillow. Keep a counter titled 'Things we definitely packed.' Film only while parked.",
+    "PAYOFF — At camp, run the roll call again. Everything is present except the checklist, now visible under the windshield wiper. Text: 'Prepared enough.'"
+  ]),
+  scriptedIdea("chatgpt-mile-marker-confessions", "Mile Marker Confessions", "Passengers answer one honest question whenever the mileage crosses a planned checkpoint.", [
+    "HOOK — Parked before departure, show the odometer and write three mileage checkpoints on a card. Question one: 'What almost made you stay home?' Keep each answer under three seconds.",
+    "CHECKPOINT RULE — When a checkpoint arrives, wait for the next safe stop. Film the same passenger-seat framing and display miles completed, miles remaining, and the next question.",
+    "MIDDLE QUESTION — Ask: 'What part has been better than expected?' Mix honest answers with one deadpan answer about the gas-station bathroom or shared snacks.",
+    "TIRED QUESTION — Near the final checkpoint ask: 'Who is hardest to travel with?' Everyone points at the camera operator. Leave the unplanned laughter in.",
+    "PAYOFF — At the destination ask: 'Would you do the drive again?' Cut the immediate groans against a quiet wide view, then show everyone nodding anyway."
+  ]),
+  scriptedIdea("chatgpt-window-reflection", "The Window Reflection Changes First", "A reflection match cut moves from Fayetteville streets to plains and mountains without filming the driver.", [
+    "HOOK — While parked in Fayetteville, frame one passenger's reflection in the closed side window. They say, 'Same face until Wyoming.' Mark phone height and face position.",
+    "SAFE REPEATS — Recreate the reflection only at parked stops with city lights, sunrise, plains, rain, and foothills behind the glass. Keep the passenger still while backgrounds change.",
+    "HUMAN PROGRESSION — Add tired eyes, new hoodie, snack crumbs, and borrowed sunglasses across cuts. Let the reflection stay serious while friends act chaotic behind it.",
+    "NEAR ARRIVAL — Reflection looks unchanged until the passenger notices mountains behind them. Their eyes shift first; camera slowly changes focus from face to background.",
+    "PAYOFF — Lower the window so the reflection disappears and the real landscape remains. Passenger says, 'Okay, that was worth staying awake for.'"
+  ]),
+  scriptedIdea("chatgpt-stop-museum", "The Museum of Road Trip Stops", "Collect one harmless object from each purchased stop and curate them like priceless artifacts.", [
+    "HOOK — Before leaving, clear one cup holder and label it 'Museum Collection.' Daxton announces: 'One artifact from every stop, nothing stolen and no litter.'",
+    "FIRST ACQUISITION — Add a clean receipt or approved paper wrapper after fuel. Film a dramatic slow push-in and museum label: location, time, cost, historical importance: questionable.",
+    "CURATOR COMMENTARY — At the food stop, a friend presents a sauce packet with white gloves or napkins. Dialogue: 'An excellent example of regional ketchup.'",
+    "COLLECTION GROWS — Safely film the cup holder at parked stops as receipts, postcards, and sealed small purchases accumulate. Never collect natural objects or leave waste behind.",
+    "PAYOFF — At camp, arrange the artifacts on a table in route order, then recycle or pack everything out. Text: 'Admission was gas money.'"
+  ]),
+  scriptedIdea("chatgpt-arrival-soundcheck", "The Arrival Soundcheck", "Record one sound at every stage until road noise gives way to the destination's natural quiet.", [
+    "HOOK — Close-ups before departure: trunk slam, seat-belt click, engine start. Text: 'What the trip sounded like before the view.' Keep each sound clean and music off.",
+    "DRIVING CHAPTER — Passengers capture safe interior audio: indicator click while parked, snack bag, soft snoring, group laugh. Do not record or direct the driver.",
+    "STOP CHAPTER — At fuel and food stops record pump click, receipt tear, cup lid, footsteps, and car doors. Match each sound to a tight visual detail.",
+    "APPROACH — Gradually reduce speech and mechanical sounds. Use tires on gravel from outside while parked, jacket zipper, boots, then wind. Let cuts slow down.",
+    "PAYOFF — At the Tetons, hold a wide silent shot for three seconds with only wind and birds. One friend whispers, 'Soundcheck,' and everyone stays quiet."
+  ]),
+  scriptedIdea("chatgpt-departure-security", "Road Trip Security Check", "Run every bag through an absurd driveway security checkpoint before it enters the trunk.", [
+    "HOOK — Set a folding table beside the car and announce: 'All luggage must clear security.' Friend places a normal backpack down while Daxton puts on dish-glove inspection gear.",
+    "INSPECTION — Pull out one harmless strange item from each bag: six granola bars, three cameras, or a full-size pillow. Ask the owner to explain it in one sentence.",
+    "CONTRABAND — Hold up something bulky and declare: 'This exceeds emotional baggage limits.' Group votes whether it earns trunk space. Never expose medication, documents, or personal belongings.",
+    "APPROVAL — Stamp a sticky note 'CLEARED' and attach it to each bag. Film bags moving from table to trunk in rapid matched cuts.",
+    "PAYOFF — At the first stop, somebody asks for the rejected item. Security officer silently reveals it was packed anyway. Text: 'Screening failure.'"
+  ]),
+  scriptedIdea("chatgpt-cupholder-census", "The Cupholder Census", "Track who controls every cupholder as drinks multiply and alliances shift across the drive.", [
+    "HOOK — Before departure, film every empty cupholder. Daxton assigns them formally: 'Driver, navigator, community, emergency.' Add labeled arrows.",
+    "FIRST TAKEOVER — At a coffee stop, reveal one person using three holders. Interview them beside the parked car: 'I have hydration needs.'",
+    "NEGOTIATION — Friends trade cupholder space for snacks, charger access, or playlist control. Show the terms as a fake legal contract.",
+    "CRISIS — A new drink arrives with nowhere to go. Everyone proposes increasingly bad locations while the car remains parked. Resolve it safely before driving.",
+    "PAYOFF — At arrival, count cups and owners. The original community holder contains one pinecone-shaped souvenir. Text: 'Government collapsed by mile 200.'"
+  ]),
+  scriptedIdea("chatgpt-nap-documentary", "The Passenger Nap Documentary", "Narrate one passenger's changing sleep positions like a serious wildlife film without disturbing them.", [
+    "HOOK — Passenger safely frames a sleeping friend from another seat. Whispered narration: 'Here we observe the road-trip sleeper before their first neck injury.'",
+    "POSITION ONE — Capture head against glass, seat belt correctly worn. Add species label: 'Window leaner.' Do not use flash, touch them, or distract the driver.",
+    "POSITION TWO — At the next parked stop, film the sleeper waking confused with pillow marks. Ask only: 'What state are we in?' Keep the genuine wrong answer.",
+    "HABITAT CHANGE — Later show hoodie cocoon, snack-pillow nest, and borrowed blanket through safe passenger clips or parked recreations.",
+    "PAYOFF — Sleeper wakes for the first mountain view and says, 'I drove most of it emotionally.' End with everyone disputing that claim."
+  ]),
+  scriptedIdea("chatgpt-stop-rating-system", "The Completely Unfair Stop Rating System", "Rate every ordinary stop using categories that become more ridiculous as everyone gets tired.", [
+    "HOOK — First fuel stop. Daxton holds a scorecard: bathroom, snacks, scenery, and parking-lot vibes. Say: 'Every stop gets an official rating.'",
+    "FIRST REVIEW — Film exterior sign, one purchased snack, clean public area, and group reaction without recording strangers. Give fast honest scores from zero to ten.",
+    "NEW CATEGORIES — Add increasingly specific categories: sink pressure, postcard selection, distance from highway, and probability of seeing the group again.",
+    "CONTROVERSY — One friend awards ten for snacks while another gives two. Settle it with a parked-car coin flip and update the leaderboard.",
+    "PAYOFF — At the Tetons overlook, attempt to rate the view. Everyone refuses numbers. Final card reads: 'Bathrooms unavailable. Scenery wins.'"
+  ]),
+  scriptedIdea("chatgpt-first-view-freeze", "Freeze When You First See It", "Capture each friend's unprompted first reaction to the destination and build a quiet group reveal.", [
+    "HOOK — Before leaving, ask each friend what their face will look like at the first Tetons view. Freeze their exaggerated predictions with names underneath.",
+    "APPROACH — At the final safe pullout, place the camera facing passengers before they exit. Tell them only to look outside; do not script reactions.",
+    "ONE AT A TIME — Film each person stepping into the same marked spot and seeing the view. Hold two seconds before and after their expression changes.",
+    "PREDICTION CHECK — Split-screen each real reaction against their departure prediction. Keep small laughs, silence, or understated 'wow' instead of forcing excitement.",
+    "PAYOFF — Group enters the frame together, backs to camera. Text: 'The drive was loud. This part was not.' End on natural wind."
+  ])
 ];
 
 window.ChatGPTVideoIdeas = {
