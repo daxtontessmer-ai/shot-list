@@ -1,6 +1,6 @@
 // Saves the app on the phone so it opens with no internet.
-const VERSION = "shotlist-v3";
-const FILES = ["./", "index.html", "manifest.webmanifest", "icon-180.png", "icon-192.png", "icon-512.png"];
+const VERSION = "shotlist-v10";
+const FILES = ["./", "index.html", "chatgpt-ideas.js", "manifest.webmanifest", "icon-180.png", "icon-192.png", "icon-512.png"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(FILES)).then(() => self.skipWaiting()));
