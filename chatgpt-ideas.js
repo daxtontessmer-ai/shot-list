@@ -423,6 +423,41 @@ const chatGPTVideoIdeas = [
     "ONE AT A TIME — Film each person stepping into the same marked spot and seeing the view. Hold two seconds before and after their expression changes.",
     "PREDICTION CHECK — Split-screen each real reaction against their departure prediction. Keep small laughs, silence, or understated 'wow' instead of forcing excitement.",
     "PAYOFF — Group enters the frame together, backs to camera. Text: 'The drive was loud. This part was not.' End on natural wind."
+  ]),
+  scriptedIdea("chatgpt-last-five-minutes", "The Last Five Minutes Before Leaving", "Turn the supposedly quick departure into a timestamped comedy about the tiny jobs every real trip requires.", [
+    "HOOK — Film the packed car and a phone reading 6:00 AM. Daxton says, 'We leave in five minutes.' Add a clean countdown graphic and keep the camera by the driveway.",
+    "MINUTE ONE — Rapid close-ups: one friend fills water bottles, another checks tire pressure, and somebody runs back for a charger. Label each task 'the last thing.'",
+    "MINUTE FIVE — Repeat the clock shot at 6:05 while everyone is still outside. One friend asks, 'Did anyone lock the back door?' Cut to three people pointing at each other.",
+    "REAL DEPARTURE — At 6:17, capture doors closing, seat belts clicking, and the car safely pulling away from a fixed tripod. Text: 'Five road-trip minutes later.'",
+    "PAYOFF — At the first stop, reveal the forgotten travel mug still sitting on the driveway via a photo from home. Dialogue: 'At least we checked the tires.'"
+  ]),
+  scriptedIdea("chatgpt-snack-draft", "The Gas Station Snack Draft", "Give every friend a strict budget and sixty seconds to draft one road-trip snack for the whole car.", [
+    "HOOK — Outside the store, show a ten-dollar bill and timer. Daxton: 'Sixty seconds, one snack each, no duplicates.' Keep payment details and strangers off camera.",
+    "THE PICKS — Film tight product shots and each friend placing a choice in the basket. Add sports-draft graphics: sweet, salty, practical, and immediately questionable.",
+    "EXPLANATIONS — Back at the parked car, each buyer gets one sentence to defend the pick. Cut quickly between claims like 'protein' and 'the bag reseals.'",
+    "TASTE TEST — Everyone tries one bite while parked, then silently ranks choices with fingers. Show the actual total and per-person cost without pretending the stop was free.",
+    "PAYOFF — Hours later, film the supposedly worst snack as the only empty bag. Its buyer looks at camera: 'The numbers speak for themselves.'"
+  ]),
+  scriptedIdea("chatgpt-navigation-apology", "A Formal Apology From the Navigator", "Stage a roadside press conference after a harmless wrong turn and reveal what the detour unexpectedly found.", [
+    "HOOK — At the next safe parking area, navigator approaches a phone used as a microphone: 'I take full responsibility for adding nineteen minutes.' Display the corrected route.",
+    "PRESS QUESTIONS — Friends ask dead-serious questions: 'Were you looking at the map?' and 'What did you think north meant?' Navigator answers without blaming the driver.",
+    "RECONSTRUCTION — Use parked close-ups of the missed-exit sign, map arrow, and passenger reaction. Never recreate a distraction or ask the driver to perform while moving.",
+    "UNEXPECTED FIND — Film one good detail from the detour: a view, strange sign, or local food stop. Add text: 'Evidence for the defense.'",
+    "PAYOFF — At arrival, navigator announces, 'We still got here.' Driver hands them a paper map labeled 'probation.' End on real group laughter."
+  ]),
+  scriptedIdea("chatgpt-stop-same-frame", "Same Frame, Different State", "Repeat one five-person composition at every stop so changing landscape and energy tell the whole journey.", [
+    "HOOK — In Fayetteville, line everyone beside the car with one person holding a cardboard state label. Mark tripod position and say, 'Same pose until the mountains.'",
+    "FIRST REPEAT — At a safe fuel stop, recreate the formation exactly but let one person eat, stretch, or look exhausted. Swap in the current state label.",
+    "NIGHT FRAME — Under legal parking-lot lighting, repeat with hoodies and coffee. Keep headlights off, avoid identifiable strangers, and preserve the same two-second hold.",
+    "MORNING FRAME — Repeat after sunrise with messy hair and changing terrain. One friend accidentally stands backward; everyone else stays committed to the pose.",
+    "PAYOFF — At the Tetons, begin in the same formation, then everyone breaks pose and turns toward the view. Text: 'You do not need a perfect trip—just a starting frame.'"
+  ]),
+  scriptedIdea("chatgpt-driver-swap-resume", "Driver Swap Job Interview", "Treat each parked driver change like a serious hiring interview based on the previous shift's performance.", [
+    "HOOK — At the first safe stop, outgoing driver sits beside the car. Daxton asks, 'Why should we renew your contract?' Add a résumé graphic: miles, missed exits, snack incidents.",
+    "REFERENCE CHECK — Ask two passengers for five-second reviews. One says, 'Excellent lane discipline.' Another adds, 'Repeated one song four times.'",
+    "NEW APPLICANT — Incoming driver presents qualifications while holding the keys: rested, caffeinated, valid license, and willing. Keep the car parked throughout the bit.",
+    "HANDOFF — Film a close-up handshake and key transfer. On-screen terms: seat belts, planned breaks, no filming by the driver, switch again when tired.",
+    "PAYOFF — At arrival, give every driver a mock performance award. Final title: 'Everyone hired. Nobody drove exhausted.' End with the keys safely pocketed."
   ])
 ];
 
