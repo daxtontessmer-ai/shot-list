@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Trip Finder">
+<meta name="theme-color" content="#245A6B">
+<link rel="apple-touch-icon" href="icon-180.png">
+<title>Trip Finder</title>
+<style>
+:root{--bg:#EEF2F2;--card:#fff;--ink:#13212A;--muted:#5E6F76;--faint:#8A989D;--line:#D3DCDD;--sea:#245A6B;--sea-soft:#D9E8EC;--buoy:#D94F22;--ok:#2F7D4F;--warn-soft:#FBE9E2}
+@media (prefers-color-scheme:dark){:root{--bg:#0A1115;--card:#16232A;--ink:#E4ECEC;--muted:#9AAAB0;--faint:#6E8088;--line:#26363F;--sea:#7FB6C6;--sea-soft:#1C3440;--buoy:#F0693A;--ok:#6CC08C;--warn-soft:#3A2219}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 -apple-system,system-ui,sans-serif}
+button{font:inherit;color:inherit}
+.app{max-width:600px;margin:0 auto;padding:calc(14px + env(safe-area-inset-top)) 16px calc(40px + env(safe-area-inset-bottom))}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.back{color:var(--sea);font-weight:600;font-size:15px;text-decoration:none;padding:4px 0;background:none;border:0;cursor:pointer}
+.back[disabled]{opacity:.35;cursor:default}
+h1{margin:6px 0 4px;font-size:28px;letter-spacing:-.01em}
+.lead{color:var(--muted);margin:0 0 14px;font-size:15px}
+.secs{display:flex;gap:4px;margin:4px 0 6px}
+.secs i{flex:1;height:6px;border-radius:3px;background:var(--line)}
+.secs i.done{background:var(--ok)}.secs i.now{background:var(--sea)}
+.where{font-size:13px;color:var(--muted);font-weight:600;letter-spacing:.04em;text-transform:uppercase}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;margin-top:10px}
+.q{font-size:21px;font-weight:700;line-height:1.3;margin:2px 0 4px;text-wrap:balance}
+.why{color:var(--muted);font-size:14px;margin:0 0 12px}
+.follow{display:inline-block;font-size:12px;font-weight:700;color:var(--sea);background:var(--sea-soft);border-radius:999px;padding:3px 9px;margin-bottom:8px}
+.opts{display:grid;gap:8px}
+.opt{width:100%;text-align:left;border:1.5px solid var(--line);background:var(--bg);border-radius:14px;padding:12px 14px;cursor:pointer}
+.opt b{display:block;font-weight:650}
+.opt span{display:block;color:var(--muted);font-size:13.5px;margin-top:1px}
+.opt.sel{border-color:var(--sea);background:var(--sea-soft)}
+.opt:active{transform:scale(.99)}
+.hint{font-size:13px;color:var(--faint);margin-top:10px;text-align:center}
+.result h2{font-size:26px;margin:2px 0 2px;letter-spacing:-.01em}
+.match{font-size:13px;font-weight:700;color:var(--ok);text-transform:uppercase;letter-spacing:.06em}
+.result h3{font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:16px 0 6px}
+.result ul{margin:0;padding-left:20px}.result li{margin:4px 0}
+.flags{background:var(--warn-soft);border-radius:12px;padding:10px 12px;margin-top:12px}
+.flags h3{margin-top:0;color:var(--buoy)}
+.runner{display:flex;justify-content:space-between;gap:10px;border-top:1px solid var(--line);padding:10px 0;font-size:15px}
+.runner:first-of-type{border-top:0}
+.runner small{color:var(--muted)}
+.bars{margin-top:4px}
+.bar{height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:4px}.bar i{display:block;height:100%;background:var(--sea)}
+.answers{font-size:14px}.answers div{display:flex;justify-content:space-between;gap:12px;border-top:1px solid var(--line);padding:7px 0}
+.answers div span:first-child{color:var(--muted)}.answers div span:last-child{text-align:right;font-weight:600}
+.foot{margin-top:16px;display:grid;gap:8px}
+.foot .row{display:flex;gap:8px}.foot .row>*{flex:1}
+.btn{display:block;text-align:center;text-decoration:none;border:0;border-radius:999px;background:var(--sea);color:var(--card);font-weight:700;padding:12px;cursor:pointer}
+.ghost{display:block;text-align:center;text-decoration:none;border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:999px;padding:11px;font-weight:600;cursor:pointer}
+.copybox{width:100%;min-height:160px;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--card);font:14px/1.4 -apple-system,system-ui,sans-serif;color:var(--ink)}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:999px;font-weight:600;font-size:14px;z-index:9}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top"><a class="back" href="./">‹ Shot List</a><button class="back" id="prev" type="button">Back a question</button></div>
+  <h1>Trip Finder</h1>
+  <p class="lead">Answer together. Some answers open follow-up questions. At the end you land on the kind of trip that fits your group, what you'll get out of it, and what to expect.</p>
+  <div id="view"></div>
+</div>
+<div id="toast"></div>
+<script>
+(() => {
+// ---------- Trip types you can land on ----------
+const TYPES = {
+  wild:   { name:"Backcountry Adventure", tag:"Hike in, camp out, earn the view",
+            get:["A real challenge you finish together","Views most people never see","The stories you'll still tell in ten years"],
+            expect:["Heavy packs, long days, sore legs","No showers, little or no cell service","Weather that can change the plan","Permits and gear to sort out ahead of time"],
+            ideas:"Grand Tetons backcountry, Wind River Range, Ozark Highlands Trail, Great Smoky Mountains" },
+  base:   { name:"Cabin Basecamp", tag:"Nature by day, a real bed at night",
+            get:["Rest and slow mornings","Easy day hikes and swims","Long talks around a fire or table"],
+            expect:["Higher lodging cost split between everyone","Booking early for good spots","Less adrenaline, more hanging out"],
+            ideas:"Buffalo River cabins, Blue Ridge Mountains, Hot Springs, Lake Tahoe" },
+  road:   { name:"Road Trip Explorer", tag:"Many stops, one car, no fixed script",
+            get:["Variety: a new place every day","Car-ride conversations and playlists","Spontaneous detours and finds"],
+            expect:["Hours in the car each day","Gas and driving split between people","Less time to settle in anywhere"],
+            ideas:"Route 66 stretch, Utah's Mighty 5, Pacific Coast Highway, Black Hills to Badlands" },
+  dirt:   { name:"Free-Camp Dirtbag Trip", tag:"Max adventure, minimum money",
+            get:["Huge freedom for almost no money","Quiet spots with no neighbors","Feeling like you earned it"],
+            expect:["Free public-land sites with only a fire ring, no water or toilets","Cooking everything yourselves","Packing out all trash","Rougher sleep and fewer comforts"],
+            ideas:"National Forest and BLM land outside the Tetons, Ozark National Forest, Moab BLM" },
+  city:   { name:"City Weekend", tag:"Food, music, people, and late nights",
+            get:["Great food and nightlife","Museums, shows, and street life","Easy logistics and lots to choose from"],
+            expect:["Higher daily spending","Lots of walking","Crowds and noise","Booking popular spots ahead"],
+            ideas:"Austin, Nashville, Chicago, New Orleans, Denver" },
+  water:  { name:"Beach & Lake Reset", tag:"Sun, water, and doing very little",
+            get:["Real rest and recharge","Swimming, boating, or floating","Golden-hour hangs"],
+            expect:["Sunburn risk and weather to watch","Beach-town prices in season","Shorter, simpler days"],
+            ideas:"Gulf Shores, Beaver Lake, Lake of the Ozarks, Destin" },
+  big:    { name:"Once-in-a-Lifetime Trip", tag:"Far away, planned well, worth it",
+            get:["A completely new culture or landscape","A trip that changes how you see things","Memories that define the year"],
+            expect:["Passports, flights, and months of planning","The biggest cost of any option","Jet lag and some days of travel"],
+            ideas:"Iceland ring road, Costa Rica, Patagonia, the Alps, Japan" }
+};
+const NAMES = Object.fromEntries(Object.entries(TYPES).map(([k, v]) => [k, v.name]));
+
+// ---------- Questions. "when" decides if a follow-up shows. "pts" nudges trip types. ----------
+const SECS = ["The why","The crew","Time","Money","Sleeping","Energy","Setting","Getting there","Planning style","Food & nights","Signal","Content"];
+const Q = [
+  { id:"why", sec:0, q:"What's the main thing you want out of this trip?", why:"This shapes everything else, so pick the one that matters most.",
+    opts:[
+      { v:"challenge", t:"A challenge", s:"Push ourselves and earn it", pts:{wild:3,dirt:2} },
+      { v:"rest", t:"Rest", s:"Slow down and recharge", pts:{base:3,water:3} },
+      { v:"connect", t:"Time together", s:"Reconnect with these people", pts:{base:2,road:2,dirt:1} },
+      { v:"explore", t:"See new places", s:"As much as we can", pts:{road:3,big:2,city:1} },
+      { v:"celebrate", t:"Celebrate something", s:"A birthday, graduation, a win", pts:{city:2,water:2,big:1} }
+    ]},
+  { id:"challengeKind", sec:0, when:a => a.why === "challenge", follow:true, q:"What kind of challenge?",
+    opts:[
+      { v:"physical", t:"Physical", s:"A summit, a long trail, a big swim", pts:{wild:3} },
+      { v:"unplug", t:"Mental", s:"No phones, no comforts, figure it out", pts:{dirt:3,wild:1} },
+      { v:"fear", t:"Facing a fear", s:"Cliff jump, heights, something new", pts:{wild:1,water:1,big:1} }
+    ]},
+  { id:"occasion", sec:0, when:a => a.why === "celebrate", follow:true, q:"How do you want to celebrate?",
+    opts:[
+      { v:"party", t:"Go out", s:"Dinners, music, nightlife", pts:{city:3} },
+      { v:"chill", t:"Low-key", s:"Good food and good company", pts:{base:2,water:2} },
+      { v:"epic", t:"Something epic", s:"A trip that matches the moment", pts:{big:3,wild:1} }
+    ]},
+
+  { id:"size", sec:1, q:"How many people are coming?",
+    opts:[
+      { v:"2", t:"Just two", pts:{road:1,wild:1,big:1} },
+      { v:"3-5", t:"3 to 5", pts:{wild:1,base:1,road:1,dirt:1} },
+      { v:"6+", t:"6 or more", pts:{base:2,city:1,water:2,wild:-2} }
+    ]},
+  { id:"crewMix", sec:1, when:a => a.size === "6+", follow:true, q:"Is the group one tight crew, or a few friend groups mixing?",
+    why:"Bigger mixed groups do better with a shared home base and free time.",
+    opts:[
+      { v:"tight", t:"One tight crew", pts:{} },
+      { v:"mixed", t:"Mixed groups", pts:{base:2,water:1,wild:-1} }
+    ]},
+  { id:"exp", sec:1, q:"How outdoorsy is the group overall?",
+    opts:[
+      { v:"pro", t:"Very", s:"We've camped and hiked a lot", pts:{wild:2,dirt:2} },
+      { v:"mix", t:"Mixed", s:"Some have, some haven't", pts:{base:1,road:1,dirt:1} },
+      { v:"new", t:"Not really", s:"Most of us are new to it", pts:{base:2,city:1,water:1,wild:-3,dirt:-2} }
+    ]},
+
+  { id:"length", sec:2, q:"How long can everyone get away?",
+    opts:[
+      { v:"short", t:"1 to 2 nights", s:"A weekend", pts:{city:2,base:1,dirt:1,big:-3,road:-1} },
+      { v:"mid", t:"3 to 4 nights", pts:{wild:1,base:1,water:1,road:1} },
+      { v:"long", t:"5 to 7 nights", pts:{road:2,wild:1,big:1} },
+      { v:"xl", t:"More than a week", pts:{big:3,road:2} }
+    ]},
+  { id:"drivecap", sec:2, when:a => a.length === "short", follow:true, q:"For a short trip, how far will you drive each way?",
+    why:"On a weekend, travel time eats into the trip fast.",
+    opts:[
+      { v:"3", t:"Under 3 hours", pts:{base:1,dirt:1,city:1} },
+      { v:"6", t:"Up to 6 hours", pts:{} },
+      { v:"fly", t:"We'd rather fly", pts:{city:2} }
+    ]},
+
+  { id:"budget", sec:3, q:"Most each person can spend, all in?", why:"Plan to the lowest number in the group, not the average.",
+    opts:[
+      { v:"low", t:"Under $150", pts:{dirt:4,wild:1,big:-5,city:-2,base:-1} },
+      { v:"mid", t:"$150 to $400", pts:{wild:1,road:1,base:1,water:1} },
+      { v:"high", t:"$400 to $900", pts:{base:1,city:1,water:1,road:1} },
+      { v:"xl", t:"Over $900", pts:{big:3,city:1} }
+    ]},
+  { id:"freeLand", sec:3, when:a => a.budget === "low", follow:true, q:"Are you good camping on free public land?",
+    why:"Free sites on National Forest and BLM land are real campsites, they just come with a fire ring and nothing else.",
+    opts:[
+      { v:"yes", t:"Yes, let's do it", pts:{dirt:3} },
+      { v:"no", t:"We'd rather pay for a campground", pts:{wild:1,dirt:-1} }
+    ]},
+
+  { id:"sleep", sec:4, q:"Where do you want to sleep?",
+    opts:[
+      { v:"tent", t:"Tent", pts:{wild:2,dirt:2} },
+      { v:"car", t:"Car or van", pts:{road:2,dirt:2} },
+      { v:"cabin", t:"Cabin or Airbnb", pts:{base:3,water:1} },
+      { v:"hotel", t:"Hotel", pts:{city:3,big:1,water:1} }
+    ]},
+  { id:"gear", sec:4, when:a => a.sleep === "tent" || a.sleep === "car", follow:true, q:"Does the group have the gear?",
+    why:"Tents, pads, bags, a stove, and a water filter.",
+    opts:[
+      { v:"all", t:"We have everything", pts:{wild:1,dirt:1} },
+      { v:"some", t:"Some of it", pts:{} },
+      { v:"none", t:"Almost none", pts:{base:1,wild:-1} }
+    ]},
+
+  { id:"energy", sec:5, q:"How hard do you want to go each day?",
+    opts:[
+      { v:"chill", t:"Easy", s:"Lots of downtime", pts:{water:3,base:1,wild:-2} },
+      { v:"mod", t:"Some of both", s:"An activity a day, then relax", pts:{base:1,road:1,city:1} },
+      { v:"hard", t:"All out", s:"Big miles and early alarms", pts:{wild:3,dirt:1} }
+    ]},
+  { id:"fitMatch", sec:5, when:a => a.energy === "hard", follow:true, q:"Is everyone at a similar fitness level?",
+    why:"An all-out trip only works if the slowest person is still having fun.",
+    opts:[
+      { v:"yes", t:"Yes, pretty even", pts:{wild:2} },
+      { v:"no", t:"No, it's a spread", pts:{base:1,road:1,wild:-1} }
+    ]},
+
+  { id:"setting", sec:6, q:"What scenery are you craving?",
+    opts:[
+      { v:"mtn", t:"Mountains", pts:{wild:2,base:1,dirt:1} },
+      { v:"desert", t:"Desert and canyons", pts:{road:2,dirt:2} },
+      { v:"water", t:"Beach or lake", pts:{water:5} },
+      { v:"city", t:"City", pts:{city:4} },
+      { v:"mix", t:"A bit of everything", pts:{road:3,big:1} }
+    ]},
+
+  { id:"travel", sec:7, q:"How are you getting there?",
+    opts:[
+      { v:"drive", t:"Driving only", pts:{road:2,dirt:1,base:1,big:-4} },
+      { v:"flyUS", t:"Flying is fine, within the US", pts:{city:1,wild:1,water:1} },
+      { v:"abroad", t:"Open to going abroad", pts:{big:4} }
+    ]},
+  { id:"passport", sec:7, when:a => a.travel === "abroad", follow:true, q:"Does everyone have a valid passport?",
+    why:"New passports can take weeks or months.",
+    opts:[
+      { v:"yes", t:"Yes, everyone", pts:{big:2} },
+      { v:"no", t:"Not everyone", pts:{big:-1} }
+    ]},
+  { id:"cars", sec:7, when:a => a.travel === "drive", follow:true, q:"Is there a reliable car with room for everyone and gear?",
+    opts:[
+      { v:"yes", t:"Yes", pts:{road:1} },
+      { v:"tight", t:"It'll be tight", pts:{} },
+      { v:"no", t:"Not really", pts:{road:-2,base:1} }
+    ]},
+
+  { id:"plan", sec:8, q:"How planned do you want it?",
+    opts:[
+      { v:"tight", t:"Every day planned", pts:{big:2,city:1} },
+      { v:"loose", t:"A loose plan", s:"Big pieces booked, details open", pts:{base:1,wild:1,water:1} },
+      { v:"wing", t:"Wing it", pts:{road:2,dirt:2} }
+    ]},
+
+  { id:"food", sec:9, q:"Food and nights look like…",
+    opts:[
+      { v:"fire", t:"Cooking over a fire", pts:{dirt:2,wild:2} },
+      { v:"mix", t:"Cook some, eat out some", pts:{base:2,road:1,water:1} },
+      { v:"out", t:"Restaurants and going out", pts:{city:3,big:1} }
+    ]},
+
+  { id:"signal", sec:10, q:"Do you want to be off the grid?",
+    opts:[
+      { v:"off", t:"Yes, no signal is a plus", pts:{wild:2,dirt:2,city:-2} },
+      { v:"some", t:"Some signal is fine", pts:{base:1,road:1} },
+      { v:"need", t:"We need to stay reachable", pts:{city:1,base:1,wild:-2,dirt:-1} }
+    ]},
+  { id:"reachable", sec:10, when:a => a.signal === "need", follow:true, q:"Who needs to be reachable, and how often?",
+    opts:[
+      { v:"checkin", t:"A daily check-in is enough", pts:{base:1} },
+      { v:"always", t:"Someone needs signal all day", pts:{city:2,base:1,wild:-2,dirt:-2} }
+    ]},
+
+  { id:"content", sec:11, q:"How much do you want to film?",
+    opts:[
+      { v:"none", t:"Phones away", pts:{} },
+      { v:"some", t:"Some clips and photos", pts:{} },
+      { v:"lots", t:"It's a content trip", s:"We're making videos", pts:{wild:1,road:1,big:1} }
+    ]},
+  { id:"contentGoal", sec:11, when:a => a.content === "lots", follow:true, q:"What's the content for?",
+    opts:[
+      { v:"brand", t:"Our brand or page", s:"Build the shot list ahead of time", pts:{} },
+      { v:"memories", t:"Just memories", pts:{} }
+    ]}
+];
+
+const KEY = "tripfinder.v1";
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let st = { a:{}, path:[] };   // answers and the order questions were answered in
+try { const d = JSON.parse(localStorage.getItem(KEY)); if (d && d.a) st = d; } catch {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch {} };
+const visible = () => Q.filter(q => !q.when || q.when(st.a));
+const nextQ = () => visible().find(q => !(q.id in st.a));
+function toast(m){ $("#toast").innerHTML = `<div class="toast">${esc(m)}</div>`; clearTimeout(toast.t); toast.t = setTimeout(() => $("#toast").innerHTML = "", 1800); }
+
+function scores() {
+  const s = Object.fromEntries(Object.keys(TYPES).map(k => [k, 0]));
+  for (const q of visible()) {
+    const o = q.opts.find(o => o.v === st.a[q.id]); if (!o) continue;
+    for (const [k, p] of Object.entries(o.pts || {})) s[k] += p;
+  }
+  return Object.entries(s).sort((a, b) => b[1] - a[1]);
+}
+// Honest heads-ups when answers pull against each other
+function flags(top) {
+  const a = st.a, f = [];
+  if (a.budget === "low" && (a.travel === "abroad" || top === "big")) f.push("A trip abroad won't fit under $150 a person. Save up first or pick a driving trip.");
+  if (a.passport === "no") f.push("Not everyone has a passport. Start applications now, or stay in the US.");
+  if (a.exp === "new" && (a.energy === "hard" || top === "wild")) f.push("The group is new to the outdoors. Pick shorter trails and a campsite you can drive to for the first one.");
+  if (a.fitMatch === "no" && a.energy === "hard") f.push("Fitness levels vary. Plan a hard day and an easy day so nobody is miserable.");
+  if (a.gear === "none" && (a.sleep === "tent" || a.sleep === "car")) f.push("You'll need to borrow or rent gear. Campus outdoor centers and REI rent it cheaply.");
+  if (a.length === "short" && a.drivecap === "6") f.push("Six hours each way on a weekend leaves about a day and a half at the destination.");
+  if (a.reachable === "always" && (top === "wild" || top === "dirt")) f.push("Backcountry spots often have no signal. Bring a satellite messenger or pick a spot with coverage.");
+  if (a.cars === "no" && top === "road") f.push("A road trip needs a dependable car. Look at a rental split between everyone.");
+  if (a.crewMix === "mixed") f.push("Mixed friend groups: plan one shared highlight and leave free time so people can split up.");
+  return f;
+}
+function expectExtra(top) {
+  const a = st.a, e = [];
+  if (a.signal === "off") e.push("Download offline maps and tell someone at home your plan");
+  if (a.content === "lots") e.push("Charge batteries every night and plan shots ahead in your Shot List");
+  if (a.freeLand === "yes") e.push("Free sites fill on weekends, so have a backup spot or two");
+  if (a.plan === "wing" && top !== "dirt" && top !== "road") e.push("Winging it here means some sold-out spots, so book the one thing you can't miss");
+  return e;
+}
+
+function render() {
+  const q = nextQ(), vis = visible();
+  const secsDone = new Set(vis.filter(x => x.id in st.a).map(x => x.sec));
+  $("#prev").disabled = !st.path.length;
+  if (!q) return renderResult();
+  const doneIn = vis.filter(x => x.sec === q.sec && x.id in st.a).length;
+  $("#view").innerHTML = `
+    <div class="secs" aria-hidden="true">${SECS.map((_, i) => `<i class="${i === q.sec ? "now" : (secsDone.has(i) && i < q.sec ? "done" : "")}"></i>`).join("")}</div>
+    <div class="where">Section ${q.sec + 1} of ${SECS.length} · ${esc(SECS[q.sec])}</div>
+    <div class="card">
+      ${q.follow ? `<span class="follow">Follow-up</span>` : ""}
+      <p class="q">${esc(q.q)}</p>
+      ${q.why ? `<p class="why">${esc(q.why)}</p>` : ""}
+      <div class="opts">${q.opts.map(o => `<button class="opt" type="button" data-v="${o.v}"><b>${esc(o.t)}</b>${o.s ? `<span>${esc(o.s)}</span>` : ""}</button>`).join("")}</div>
+    </div>
+    <p class="hint">${doneIn ? "" : "Answer as a group. "}Some answers open a follow-up question.</p>`;
+}
+
+function renderResult() {
+  const sc = scores(), [topK, topS] = sc[0], t = TYPES[topK];
+  const max = Math.max(1, topS), fl = flags(topK), ex = [...t.expect, ...expectExtra(topK)];
+  const answered = visible().filter(q => q.id in st.a);
+  $("#view").innerHTML = `
+    <div class="secs" aria-hidden="true">${SECS.map(() => `<i class="done"></i>`).join("")}</div>
+    <div class="card result">
+      <div class="match">Your trip type</div>
+      <h2>${esc(t.name)}</h2>
+      <p class="why" style="margin:0">${esc(t.tag)}</p>
+      <h3>What you'll get out of it</h3><ul>${t.get.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      <h3>What to expect</h3><ul>${ex.map(x => `<li>${esc(x)}</li>`).join("")}</ul>
+      <h3>Places to look at</h3><p style="margin:0">${esc(t.ideas)}</p>
+      ${fl.length ? `<div class="flags"><h3>Heads up</h3><ul>${fl.map(x => `<li>${esc(x)}</li>`).join("")}</ul></div>` : ""}
+    </div>
+    <div class="card">
+      <h3 style="margin:0 0 6px;font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)">Close runners-up</h3>
+      ${sc.slice(1, 3).map(([k, s]) => `<div class="runner"><span>${esc(NAMES[k])}<br><small>${esc(TYPES[k].tag)}</small></span><span class="bars" style="width:90px"><div class="bar"><i style="width:${Math.max(4, Math.round(Math.max(0, s) / max * 100))}%"></i></div></span></div>`).join("")}
+    </div>
+    <div class="card answers">
+      <h3 style="margin:0 0 6px;font-size:14px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)">Your answers</h3>
+      ${answered.map(q => `<div><span>${esc(q.q)}</span><span>${esc(q.opts.find(o => o.v === st.a[q.id]).t)}</span></div>`).join("")}
+    </div>
+    <div class="foot">
+      <a class="btn" href="trip.html">Plan the details in Trip Planner</a>
+      <button class="ghost" id="copy" type="button">Copy result to send the group</button>
+      <textarea class="copybox" id="copyBox" readonly hidden aria-label="Result text"></textarea>
+      <button class="ghost" id="again" type="button">Start over</button>
+    </div>`;
+  $("#copy").onclick = async () => {
+    const text = [`Trip Finder says: ${t.name} (${t.tag})`, "", "What we'll get:", ...t.get.map(x => "• " + x), "", "What to expect:", ...ex.map(x => "• " + x),
+      ...(fl.length ? ["", "Heads up:", ...fl.map(x => "• " + x)] : []), "", "Places to look at: " + t.ideas, "", "Runners-up: " + sc.slice(1, 3).map(([k]) => NAMES[k]).join(", ")].join("\n");
+    try { await navigator.clipboard.writeText(text); toast("Copied. Paste it in the group chat"); }
+    catch { const b = $("#copyBox"); b.hidden = false; b.value = text; b.focus(); b.select(); toast("Select all and copy"); }
+  };
+  let armed = false;
+  $("#again").onclick = () => {
+    if (!armed) { armed = true; $("#again").textContent = "Tap again to clear your answers"; return; }
+    st = { a:{}, path:[] }; save(); render(); scrollTo(0, 0);
+  };
+}
+
+$("#view").addEventListener("click", e => {
+  const b = e.target.closest(".opt"); if (!b) return;
+  const q = nextQ(); if (!q) return;
+  b.classList.add("sel");
+  st.a[q.id] = b.dataset.v; st.path.push(q.id);
+  // Drop answers to follow-ups that no longer apply
+  const vis = new Set(visible().map(x => x.id));
+  for (const k of Object.keys(st.a)) if (!vis.has(k)) delete st.a[k];
+  st.path = st.path.filter(k => k in st.a);
+  save(); setTimeout(() => { render(); scrollTo({ top: 0, behavior: "smooth" }); }, 140);
+});
+$("#prev").onclick = () => {
+  const last = st.path.pop(); if (!last) return;
+  delete st.a[last];
+  const vis = new Set(visible().map(x => x.id));
+  for (const k of Object.keys(st.a)) if (!vis.has(k)) delete st.a[k];
+  st.path = st.path.filter(k => k in st.a);
+  save(); render();
+};
+render();
+})();
+</script>
+</body>
+</html>

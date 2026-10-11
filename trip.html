@@ -18,6 +18,7 @@ button,input,textarea{font:inherit;color:inherit}
 .back{display:inline-block;color:var(--sea);font-weight:600;font-size:15px;text-decoration:none;padding:4px 0}
 h1{margin:6px 0 4px;font-size:28px;letter-spacing:-.01em}
 .lead{color:var(--muted);margin:0 0 12px;font-size:15px}
+.finder{display:flex;justify-content:space-between;gap:10px;align-items:center;text-decoration:none;color:var(--ink);background:var(--sea-soft);border-radius:12px;padding:11px 12px;margin:0 0 10px;font-size:14px}.finder span{color:var(--sea);font-weight:600;white-space:nowrap}
 .name{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:var(--card);font-size:17px;font-weight:600}
 .prog{position:sticky;top:0;z-index:2;background:var(--bg);padding:10px 0 8px;margin-top:8px}
 .prog .row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-weight:600}
@@ -51,6 +52,7 @@ h1{margin:6px 0 4px;font-size:28px;letter-spacing:-.01em}
   <a class="back" href="./">‹ Shot List</a>
   <h1>Trip Planner</h1>
   <p class="lead">Every question you and your friends need to answer to land on the trip. Work through it together, top to bottom.</p>
+  <a class="finder" href="trip-finder.html"><b>Not sure what kind of trip yet?</b><span>Take the Trip Finder first ›</span></a>
   <input class="name" id="tripName" placeholder="Name this trip (e.g. Tetons, spring break)" autocomplete="off" aria-label="Trip name">
   <div class="prog" id="prog"></div>
   <div id="list"></div>
