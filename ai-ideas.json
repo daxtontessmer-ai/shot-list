@@ -1,0 +1,59 @@
+[
+  {
+    "id": "ai-01-head-drop",
+    "title": "Head Drop: Class to the Tetons (Daxton's idea)",
+    "desc": "Daxton's idea. I'm falling asleep in class, my head slips off my hand, and the moment it hits the desk I'm at a picnic table in the Tetons. Text: \"POV: you zoned out in lecture\". The whole trick is matching the framing so the cut lands on the hit.",
+    "ref": "Credit: Daxton Tessmer. Technique: match cut on the impact.",
+    "scenes": [
+      { "id": "s1", "what": "CLASSROOM, side angle: me at a desk, chin resting on my hand, professor's voice in the background. Hold 3 to 4 seconds so it feels real. Note the camera height and how far away it is", "p": ["Portrait","Video","Tripod","Still","Medium"] },
+      { "id": "s2", "what": "CLOSE-UP: eyelids getting heavy, a slow blink, head starting to slide down my hand", "p": ["Portrait","Video","Friend","Still","Close-up"] },
+      { "id": "s3", "what": "THE DROP (classroom half): head slips off my hand toward the desk. Stop the clip the instant before my head touches the desk. Put a small piece of tape on the phone screen where the desk edge is so you can line up the next shot", "p": ["Portrait","Video","Tripod","Still","Medium"] },
+      { "id": "s4", "what": "THE DROP (Tetons half): same shirt, same arm position, picnic table with the Tetons behind me. Set the phone at the same height and distance, line the table edge up with the tape. Start mid-fall and let my head hit the table (cushion it with my other hand out of frame)", "p": ["Portrait","Video","Tripod","Still","Medium"] },
+      { "id": "s5", "what": "EDIT: cut exactly on contact. Add a loud thud plus a bass drop or nature sound swell the frame the Tetons appear", "p": ["Portrait","Video","","",""] },
+      { "id": "s6", "what": "WAKE UP: I pop my head up, confused, look left and right at the mountains, wipe my mouth", "p": ["Portrait","Video","Tripod","Still","Medium"] },
+      { "id": "s7", "what": "REVEAL: slow pull back or pan to the full mountain range so people see where I am", "p": ["Portrait","Video","Friend","Zoom/Pan","Wide"] },
+      { "id": "s8", "what": "OPTIONAL ENDING: a friend walks into frame and says \"Bro, class ended three days ago\" or end on text \"Venture out\"", "p": ["Portrait","Video","Tripod","Still","Medium"] }
+    ]
+  },
+  {
+    "id": "ai-02-backpack-wipe",
+    "title": "Backpack Wipe: Dorm to Trailhead",
+    "desc": "Object-mask transition. I swing my backpack over the lens in my dorm and pull it away at a trailhead. Text: \"Me after my last class on Friday\". Simple, loops well, and shows the trip in 5 seconds.",
+    "ref": "Technique: object masking (cover the lens, reveal the new place).",
+    "scenes": [
+      { "id": "s1", "what": "DORM: I'm at my desk, look at the clock or my phone, smile, grab my backpack", "p": ["Portrait","Video","Tripod","Still","Medium"] },
+      { "id": "s2", "what": "I swing the backpack toward the camera until it covers the whole lens. Keep moving so the motion carries into the next clip", "p": ["Portrait","Video","Tripod","Still","Close-up"] },
+      { "id": "s3", "what": "TRAILHEAD: start with the backpack covering the lens, pull it away the same direction to reveal me at the trailhead or overlook, already wearing it", "p": ["Portrait","Video","Tripod","Still","Close-up"] },
+      { "id": "s4", "what": "I turn and walk up the trail, camera stays put so I get smaller in the frame", "p": ["Portrait","Video","Tripod","Still","Wide"] },
+      { "id": "s5", "what": "EDIT: cut on the frame where the lens is fully covered. Add a whoosh sound", "p": ["Portrait","Video","","",""] }
+    ]
+  },
+  {
+    "id": "ai-03-whip-pan-window",
+    "title": "Whip Pan Out the Window",
+    "desc": "Studying, I glance at the window, the camera whips toward it, and the whip lands on a real mountain view. Text: \"Was supposed to study this weekend\".",
+    "ref": "Technique: whip pan (both clips whip the same direction).",
+    "scenes": [
+      { "id": "s1", "what": "DORM: me buried in homework, sighing, slowly turning my head toward the window", "p": ["Portrait","Video","Friend","Still","Medium"] },
+      { "id": "s2", "what": "Friend whips the camera fast to the RIGHT toward the window so it blurs", "p": ["Portrait","Video","Friend","Swing","Medium"] },
+      { "id": "s3", "what": "OUTSIDE: start this clip already whipping to the RIGHT, then stop hard on the mountain view or lake", "p": ["Portrait","Video","Friend","Swing","Wide"] },
+      { "id": "s4", "what": "Pan from the view to me standing there with my textbook, shrug, toss it over my shoulder", "p": ["Portrait","Video","Friend","Zoom/Pan","Medium"] },
+      { "id": "s5", "what": "EDIT: cut in the middle of the blur on both clips. Add a whoosh", "p": ["Portrait","Video","","",""] }
+    ]
+  },
+  {
+    "id": "ai-04-types-of-hikers",
+    "title": "Types of People on a Group Hike",
+    "desc": "One person plays every character with a quick costume swap. Text: \"Types of people on every group hike\". Comment bait: \"which one are you?\"",
+    "ref": "Format: \"types of people\" character skit, one actor, a label on screen for each type.",
+    "scenes": [
+      { "id": "s1", "what": "THE SPEAKER GUY: bluetooth speaker on the backpack strap blasting music, nodding at everyone. Label: \"The DJ\"", "p": ["Portrait","Video","Friend","Walk","Medium"] },
+      { "id": "s2", "what": "THE OVER-GEARED ONE: trekking poles, hydration pack, headlamp at noon, checking a GPS watch on a flat trail. Label: \"Bought everything at REI yesterday\"", "p": ["Portrait","Video","Friend","Walk","Medium"] },
+      { "id": "s3", "what": "THE PHOTOGRAPHER: stops every ten feet, lying on the ground for the angle while everyone waits. Label: \"Just one more\"", "p": ["Portrait","Video","Friend","Still","Wide"] },
+      { "id": "s4", "what": "THE \"HOW MUCH FARTHER\": hunched over, five minutes in. \"Are we close?\" Label: \"Been hiking 4 minutes\"", "p": ["Portrait","Video","Friend","Still","Close-up"] },
+      { "id": "s5", "what": "THE TRAIL RUNNER: sprints past everyone uphill, barely breathing. Label: \"Who invited him\"", "p": ["Portrait","Video","Tripod","Still","Wide"] },
+      { "id": "s6", "what": "THE SUMMIT PHILOSOPHER: sitting on the edge staring out. \"It's not about the destination, man.\" Label: \"Every single time\"", "p": ["Portrait","Video","Friend","Still","Medium"] },
+      { "id": "s7", "what": "END: all of them (same person, quick cuts) in a row. Text: \"Tag the one who's all of them\"", "p": ["Portrait","Video","","",""] }
+    ]
+  }
+]
