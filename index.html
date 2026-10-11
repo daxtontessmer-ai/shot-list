@@ -158,6 +158,38 @@ if (!data.meta.chatgptIdeasV6) {
   data.meta.chatgptIdeasV6 = true;
   save();
 }
+if (!data.meta.chatgptIdeasV7) {
+  let chatGPTCategory = data.cats.find(c => c.cat === CHATGPT_CAT);
+  if (!chatGPTCategory) { chatGPTCategory = {cat:CHATGPT_CAT,videos:[]}; data.cats.unshift(chatGPTCategory); }
+  const existing = new Set(chatGPTCategory.videos.map(v => v.id));
+  CHATGPT_IDEAS.forEach(idea => { if (!existing.has(idea.id)) chatGPTCategory.videos.push(JSON.parse(JSON.stringify(idea))); });
+  data.meta.chatgptIdeasV7 = true;
+  save();
+}
+if (!data.meta.chatgptIdeasV8) {
+  let chatGPTCategory = data.cats.find(c => c.cat === CHATGPT_CAT);
+  if (!chatGPTCategory) { chatGPTCategory = {cat:CHATGPT_CAT,videos:[]}; data.cats.unshift(chatGPTCategory); }
+  const existing = new Set(chatGPTCategory.videos.map(v => v.id));
+  CHATGPT_IDEAS.forEach(idea => { if (!existing.has(idea.id)) chatGPTCategory.videos.push(JSON.parse(JSON.stringify(idea))); });
+  data.meta.chatgptIdeasV8 = true;
+  save();
+}
+if (!data.meta.chatgptIdeasV9) {
+  let chatGPTCategory = data.cats.find(c => c.cat === CHATGPT_CAT);
+  if (!chatGPTCategory) { chatGPTCategory = {cat:CHATGPT_CAT,videos:[]}; data.cats.unshift(chatGPTCategory); }
+  const existing = new Set(chatGPTCategory.videos.map(v => v.id));
+  CHATGPT_IDEAS.forEach(idea => { if (!existing.has(idea.id)) chatGPTCategory.videos.push(JSON.parse(JSON.stringify(idea))); });
+  data.meta.chatgptIdeasV9 = true;
+  save();
+}
+if (!data.meta.chatgptIdeasV10) {
+  let chatGPTCategory = data.cats.find(c => c.cat === CHATGPT_CAT);
+  if (!chatGPTCategory) { chatGPTCategory = {cat:CHATGPT_CAT,videos:[]}; data.cats.unshift(chatGPTCategory); }
+  const existing = new Set(chatGPTCategory.videos.map(v => v.id));
+  CHATGPT_IDEAS.forEach(idea => { if (!existing.has(idea.id)) chatGPTCategory.videos.push(JSON.parse(JSON.stringify(idea))); });
+  data.meta.chatgptIdeasV10 = true;
+  save();
+}
 function saveOpen(){ try { localStorage.setItem(KEY+".open", JSON.stringify([...open])); } catch {} }
 function toast(m){ $("#toast").innerHTML = `<div class="toast">${esc(m)}</div>`; clearTimeout(toast.t); toast.t = setTimeout(()=>$("#toast").innerHTML="", 1800); }
 const allVids = () => data.cats.flatMap(c => c.videos);
