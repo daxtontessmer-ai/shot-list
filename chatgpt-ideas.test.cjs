@@ -15,7 +15,7 @@ test("keeps Daxton's transition first and credits him", () => {
 
 test("every generated idea is complete and executable", () => {
   assert.equal(catalog.category, "CHATGPT'S VIDEO IDEAS");
-  assert.equal(catalog.ideas.length, 41);
+  assert.equal(catalog.ideas.length, 46);
   for (const idea of catalog.ideas) {
     assert.ok(idea.id && idea.title && idea.desc && idea.ref);
     assert.ok(idea.scenes.length >= 5, `${idea.title} needs at least five scenes`);
