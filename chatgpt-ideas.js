@@ -458,6 +458,41 @@ const chatGPTVideoIdeas = [
     "NEW APPLICANT — Incoming driver presents qualifications while holding the keys: rested, caffeinated, valid license, and willing. Keep the car parked throughout the bit.",
     "HANDOFF — Film a close-up handshake and key transfer. On-screen terms: seat belts, planned breaks, no filming by the driver, switch again when tired.",
     "PAYOFF — At arrival, give every driver a mock performance award. Final title: 'Everyone hired. Nobody drove exhausted.' End with the keys safely pocketed."
+  ]),
+  scriptedIdea("chatgpt-cooler-inventory", "The Cooler Inventory Crisis", "Follow one carefully packed cooler as five friends immediately destroy its organization across the drive.", [
+    "HOOK — In the driveway, film a perfectly organized cooler from above. Daxton points to labeled rows: breakfast, lunch, drinks, emergency cheese. Text: 'This system will last all weekend.'",
+    "FIRST RAID — At the first safe stop, open the cooler from the identical overhead angle. One drink is missing and every row has shifted. Friend insists, 'I put it back exactly.'",
+    "AUDIT — Assign one friend as inventory manager. They count items with a clipboard while everyone requests snacks at once. Add red arrows to three items nobody remembers packing.",
+    "COLLAPSE — At the food stop, reveal melted ice, floating wrappers, and one crushed sandwich. Keep food safe, drain only where permitted, and repack before driving.",
+    "PAYOFF — At camp, the only untouched item is emergency cheese. Everyone cheers as if it saved the expedition. Text: 'The system worked once.'"
+  ]),
+  scriptedIdea("chatgpt-friend-arrival-intros", "How Everyone Arrives for the Trip", "Introduce each friend through the completely different way they appear at the departure point.", [
+    "HOOK — Locked driveway shot and text: 'Same departure time. Five interpretations.' Daxton waits beside the open trunk and checks the clock.",
+    "THE EARLY ONE — Friend enters frame with coffee, printed itinerary, and concern. Dialogue: 'I have been here eighteen minutes.' Freeze-frame their name and unofficial role.",
+    "THE CHAOTIC ONE — Match the entrance as another friend runs in carrying loose shoes and an unzipped bag. Something harmless falls out; they keep moving without noticing.",
+    "THE MINIMALIST — Third friend arrives with one tiny backpack, looks at the packed trunk, and asks, 'Are we moving there?' Keep every entrance framed identically.",
+    "PAYOFF — The late friend finally appears eating breakfast and says, 'Perfect timing.' Everyone closes the trunk behind them. Cut to the car pulling away safely."
+  ]),
+  scriptedIdea("chatgpt-rest-stop-one-line", "One Line From Every Rest Stop", "Build an honest travel diary by letting each friend contribute exactly one sentence at every stop.", [
+    "HOOK — At the first safe stop, hold up a card reading 'One sentence. No retakes.' Friend says, 'We have been driving forty minutes and already need a break.'",
+    "ROTATION — At each later stop, a different friend stands beside the parked car in the same framing. Display location, elapsed time, and miles remaining.",
+    "MIDDLE TRUTH — Keep imperfect lines: 'I regret the energy drink,' 'The playlist has become hostile,' or 'Kansas is wider than expected.' Avoid filming strangers or restroom entrances.",
+    "CALLBACK — One person repeatedly begins with 'Honestly, great' while looking progressively more tired. Cut the versions together as a three-beat running joke.",
+    "PAYOFF — At the destination, everyone tries to speak at once, then goes quiet at the view. Final line: 'That is the sentence.' Hold natural sound."
+  ]),
+  scriptedIdea("chatgpt-daylight-dashboard", "The Dashboard Daylight Clock", "Use a parked dashboard composition to show one full travel day changing through light, weather, and mileage.", [
+    "HOOK — Before sunrise and before moving, frame the dashboard clock, windshield, and one coffee. Text: 'One frame until the mountains.' Record the exact phone position.",
+    "SAFE REPEATS — At each parked stop, recreate the frame with the new time, sky, mileage, and passenger-seat object. Never mount, adjust, or operate the camera while driving.",
+    "OBJECT STORY — Coffee becomes water, then snacks, a paper map, sunglasses, and a borrowed beanie. Keep hands entering from the same edge for clean match cuts.",
+    "WEATHER TURN — Use one rainy stop and one bright stop to jump the windshield from gray to gold. Add only place and time; let the visual change carry the story.",
+    "PAYOFF — Final parked frame shows mountains through the windshield. A hand removes the last receipt, revealing the view. Text: 'A whole day, one seat.'"
+  ]),
+  scriptedIdea("chatgpt-roadside-photo-director", "The Roadside Photo Director", "Let a different friend direct one deliberately awkward group photo at each safe roadside stop.", [
+    "HOOK — At the first stop, Daxton announces: 'Everyone gets one photo and absolute creative control.' Show a tripod, timer, and blank five-photo grid.",
+    "DIRECTOR ONE — Friend arranges everyone like a serious album cover beside the parked car. Capture their instructions and the final still with a camera-shutter transition.",
+    "DIRECTOR TWO — At a legal scenic stop, next friend demands an overcomplicated jumping pose. Show three failed attempts before the least-bad photo lands in the grid.",
+    "TIRED DIRECTOR — Late in the drive, a friend simply says, 'Sit wherever.' The candid result becomes the best image. Keep the car parked and stay clear of traffic.",
+    "PAYOFF — At arrival, reveal all five photos in route order. The group chooses the imperfect candid as the trip cover. Text: 'Nobody needed a professional pose.'"
   ])
 ];
 
