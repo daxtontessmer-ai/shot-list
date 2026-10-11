@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Trip Planner">
+<meta name="theme-color" content="#245A6B">
+<link rel="apple-touch-icon" href="icon-180.png">
+<title>Trip Planner</title>
+<style>
+:root{--bg:#EEF2F2;--card:#fff;--ink:#13212A;--muted:#5E6F76;--faint:#8A989D;--line:#D3DCDD;--sea:#245A6B;--sea-soft:#D9E8EC;--buoy:#D94F22;--ok:#2F7D4F}
+@media (prefers-color-scheme:dark){:root{--bg:#0A1115;--card:#16232A;--ink:#E4ECEC;--muted:#9AAAB0;--faint:#6E8088;--line:#26363F;--sea:#7FB6C6;--sea-soft:#1C3440;--buoy:#F0693A;--ok:#6CC08C}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 -apple-system,system-ui,sans-serif}
+button,input,textarea{font:inherit;color:inherit}
+.app{max-width:600px;margin:0 auto;padding:calc(14px + env(safe-area-inset-top)) 16px calc(48px + env(safe-area-inset-bottom))}
+.back{display:inline-block;color:var(--sea);font-weight:600;font-size:15px;text-decoration:none;padding:4px 0}
+h1{margin:6px 0 4px;font-size:28px;letter-spacing:-.01em}
+.lead{color:var(--muted);margin:0 0 12px;font-size:15px}
+.name{width:100%;border:1px solid var(--line);border-radius:12px;padding:11px 12px;background:var(--card);font-size:17px;font-weight:600}
+.prog{position:sticky;top:0;z-index:2;background:var(--bg);padding:10px 0 8px;margin-top:8px}
+.prog .row{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);font-weight:600}
+.bar{height:7px;border-radius:4px;background:var(--line);overflow:hidden;margin-top:6px}.bar i{display:block;height:100%;background:var(--ok);transition:width .3s}
+.sec{background:var(--card);border:1px solid var(--line);border-radius:14px;margin-top:12px;overflow:hidden}
+.shead{width:100%;display:flex;align-items:center;gap:10px;border:0;background:transparent;padding:13px 14px;text-align:left;cursor:pointer}
+.shead .num{flex:none;width:26px;height:26px;border-radius:50%;background:var(--sea-soft);color:var(--sea);font-size:13px;font-weight:700;display:grid;place-items:center}
+.sec.complete .shead .num{background:var(--ok);color:var(--card)}
+.shead .t{flex:1;font-weight:650}
+.shead .c{font-size:13px;color:var(--muted);font-weight:600}
+.chev{color:var(--faint);transition:transform .15s}.sec.open .chev{transform:rotate(90deg)}
+.sbody{padding:0 14px 12px}
+.q{border-top:1px solid var(--line);padding:12px 0 4px}
+.q label{display:block;font-weight:600;font-size:15px}
+.q .hint{display:block;color:var(--faint);font-size:13px;margin:2px 0 6px}
+.q textarea{width:100%;min-height:44px;resize:vertical;border:1px solid var(--line);border-radius:10px;padding:9px 10px;background:var(--bg);font-size:16px;line-height:1.4}
+.q textarea:focus{outline:none;border-color:var(--sea)}
+.q.done label::after{content:" ✓";color:var(--ok)}
+.foot{margin-top:22px;display:grid;gap:8px}
+.foot .row{display:flex;gap:8px}.foot .row>*{flex:1}
+.btn{border:0;border-radius:999px;background:var(--sea);color:var(--card);font-weight:700;padding:12px;cursor:pointer}
+.ghost{border:1px solid var(--line);background:var(--card);border-radius:999px;padding:11px;font-weight:600;cursor:pointer}
+.ghost.red{color:var(--buoy)}
+.note{font-size:12.5px;color:var(--faint);text-align:center;margin:4px 0 0}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:999px;font-weight:600;font-size:14px;z-index:9}
+.copybox{width:100%;min-height:160px;border:1px solid var(--line);border-radius:10px;padding:10px;background:var(--card);font-size:14px}
+</style>
+</head>
+<body>
+<div class="app">
+  <a class="back" href="./">‹ Shot List</a>
+  <h1>Trip Planner</h1>
+  <p class="lead">Every question you and your friends need to answer to land on the trip. Work through it together, top to bottom.</p>
+  <input class="name" id="tripName" placeholder="Name this trip (e.g. Tetons, spring break)" autocomplete="off" aria-label="Trip name">
+  <div class="prog" id="prog"></div>
+  <div id="list"></div>
+  <div class="foot">
+    <button class="btn" id="copy" type="button">Copy plan to send the group</button>
+    <textarea class="copybox" id="copyBox" readonly hidden aria-label="Trip plan text"></textarea>
+    <div class="row"><button class="ghost" id="expand" type="button">Open all</button><button class="ghost red" id="reset" type="button">Start a new trip</button></div>
+    <p class="note">Answers save on this device and work with no signal.</p>
+  </div>
+</div>
+<div id="toast"></div>
+<script>
+(() => {
+const SECTIONS = [
+  ["Why we're going", [
+    ["What do we want to feel or get out of this trip?", "Adventure, rest, reconnecting, a challenge, celebrating something"],
+    ["Is there an occasion or reason behind it?", "Birthday, end of semester, last trip before someone moves"],
+    ["What would make us say \"that was the best trip\" afterward?", "One sentence everyone agrees on"]
+  ]],
+  ["Who's coming", [
+    ["Who is definitely in, and who is a maybe?", ""],
+    ["Who is the point person making the final calls and bookings?", ""],
+    ["Does anyone have limits we need to plan around?", "Budget, time off, fitness, fears, health needs, curfews"]
+  ]],
+  ["When", [
+    ["Which dates or weekends work for everyone?", "List each person's blackout dates"],
+    ["How many days and nights?", ""],
+    ["Does anyone need to request time off, and by when?", ""]
+  ]],
+  ["Where", [
+    ["What places are we considering?", "Throw every idea in, then narrow to three"],
+    ["Nature, city, or a mix?", ""],
+    ["How far are we willing to travel to get there?", "Hours of driving, or a flight"],
+    ["What's the weather and season like there on our dates?", ""]
+  ]],
+  ["Money", [
+    ["What's the most each person can spend, all in?", "Ask privately if needed, then plan to the lowest number"],
+    ["How will we split shared costs?", "Splitwise, one person pays and everyone Venmos, etc."],
+    ["Who covers deposits up front, and when do people pay them back?", ""]
+  ]],
+  ["Getting there", [
+    ["Are we driving or flying?", ""],
+    ["Whose car(s), and who is comfortable driving which stretches?", ""],
+    ["How do we split gas, tolls, parking, or flights?", ""]
+  ]],
+  ["Where we sleep", [
+    ["Camping, free public land, Airbnb, or hotel?", ""],
+    ["Do we need reservations or permits, and when do they open?", ""],
+    ["What sleeping gear do we have, and what's missing?", "Tents, pads, bags, stove"]
+  ]],
+  ["What we do", [
+    ["What are the must-do activities?", ""],
+    ["What's the one big highlight of the trip?", "Summit, cliff jump, sunrise spot, a show"],
+    ["Are any activities above someone's skill or fitness level?", ""],
+    ["Do we want rest time or a slow day built in?", ""]
+  ]],
+  ["Food", [
+    ["Cooking, eating out, or a mix?", ""],
+    ["Any allergies or things people don't eat?", ""],
+    ["Who handles groceries and cooking gear?", ""]
+  ]],
+  ["Packing & gear", [
+    ["What shared gear do we need, and who brings each thing?", ""],
+    ["What does each person need to pack for the weather?", ""]
+  ]],
+  ["Safety", [
+    ["Who back home knows our plan and when we'll be back?", ""],
+    ["Will we have cell service? What's the plan if not?", "Offline maps, meet-up spots"],
+    ["First aid kit, emergency contacts, nearest hospital?", ""],
+    ["Any rules, fire bans, or permits we need to know?", ""]
+  ]],
+  ["Content", [
+    ["What do we want to film or photograph?", "Add the shots to your Shot List"],
+    ["Who is filming, and on what gear?", ""]
+  ]],
+  ["Deadlines", [
+    ["When do we have to decide where we're going?", ""],
+    ["What has to be booked, and by what date?", ""],
+    ["Where do we keep talking about this?", "Group chat name"]
+  ]]
+];
+const KEY = "tripplanner.v1";
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+let st = { name:"", a:{}, open:[0] };
+try { const d = JSON.parse(localStorage.getItem(KEY)); if (d && d.a) st = Object.assign(st, d); } catch {}
+const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch {} };
+const id = (s, q) => s + "-" + q;
+const total = SECTIONS.reduce((n, s) => n + s[1].length, 0);
+const answered = () => Object.values(st.a).filter(v => v && v.trim()).length;
+function toast(m){ $("#toast").innerHTML = `<div class="toast">${esc(m)}</div>`; clearTimeout(toast.t); toast.t = setTimeout(() => $("#toast").innerHTML = "", 1800); }
+function grow(t){ t.style.height = "auto"; t.style.height = Math.max(44, t.scrollHeight + 2) + "px"; }
+function prog(){
+  const d = answered();
+  $("#prog").innerHTML = `<div class="row"><span>${d} of ${total} answered</span><span>${Math.round(d/total*100)}%</span></div><div class="bar"><i style="width:${d/total*100}%"></i></div>`;
+  SECTIONS.forEach((s, si) => {
+    const n = s[1].filter((_, qi) => (st.a[id(si, qi)] || "").trim()).length;
+    const el = document.getElementById("sec" + si); if (!el) return;
+    el.querySelector(".c").textContent = n + "/" + s[1].length;
+    el.classList.toggle("complete", n === s[1].length);
+    s[1].forEach((_, qi) => el.querySelector(`[data-q="${id(si, qi)}"]`)?.classList.toggle("done", !!(st.a[id(si, qi)] || "").trim()));
+  });
+}
+function render(){
+  $("#tripName").value = st.name || "";
+  $("#list").innerHTML = SECTIONS.map(([title, qs], si) => `
+    <div class="sec ${st.open.includes(si) ? "open" : ""}" id="sec${si}">
+      <button class="shead" type="button" data-sec="${si}" aria-expanded="${st.open.includes(si)}">
+        <span class="num">${si + 1}</span><span class="t">${esc(title)}</span><span class="c"></span><span class="chev">›</span>
+      </button>
+      <div class="sbody" ${st.open.includes(si) ? "" : "hidden"}>
+        ${qs.map(([q, h], qi) => `<div class="q" data-q="${id(si, qi)}">
+          <label for="q${id(si, qi)}">${esc(q)}</label>${h ? `<span class="hint">${esc(h)}</span>` : ""}
+          <textarea id="q${id(si, qi)}" data-a="${id(si, qi)}" rows="1">${esc(st.a[id(si, qi)] || "")}</textarea>
+        </div>`).join("")}
+      </div>
+    </div>`).join("");
+  document.querySelectorAll("textarea[data-a]").forEach(grow);
+  $("#expand").textContent = st.open.length === SECTIONS.length ? "Close all" : "Open all";
+  prog();
+}
+document.addEventListener("click", e => {
+  const h = e.target.closest("[data-sec]"); if (!h) return;
+  const si = +h.dataset.sec;
+  st.open = st.open.includes(si) ? st.open.filter(x => x !== si) : [...st.open, si];
+  save(); render();
+  if (st.open.includes(si)) document.querySelector(`#sec${si} textarea`)?.focus({ preventScroll:true });
+});
+document.addEventListener("input", e => {
+  if (e.target.dataset.a) { st.a[e.target.dataset.a] = e.target.value; grow(e.target); save(); prog(); }
+  if (e.target.id === "tripName") { st.name = e.target.value; save(); }
+});
+$("#expand").onclick = () => { st.open = st.open.length === SECTIONS.length ? [] : SECTIONS.map((_, i) => i); save(); render(); };
+let armed = false;
+$("#reset").onclick = () => {
+  if (!armed) { armed = true; $("#reset").textContent = "Tap again to clear every answer"; setTimeout(() => { armed = false; $("#reset").textContent = "Start a new trip"; }, 4000); return; }
+  armed = false; st = { name:"", a:{}, open:[0] }; save(); render(); $("#reset").textContent = "Start a new trip"; toast("Cleared for a new trip");
+};
+$("#copy").onclick = async () => {
+  const lines = [(st.name || "Our trip") + " — plan"];
+  SECTIONS.forEach(([title, qs], si) => {
+    const got = qs.map(([q], qi) => [q, (st.a[id(si, qi)] || "").trim()]).filter(x => x[1]);
+    if (!got.length) return;
+    lines.push("", title.toUpperCase());
+    got.forEach(([q, a]) => lines.push("• " + q + "\n  " + a.replace(/\n/g, "\n  ")));
+  });
+  const open = total - answered();
+  if (open) lines.push("", open + " questions still open.");
+  const text = lines.join("\n");
+  try { await navigator.clipboard.writeText(text); toast("Copied. Paste it in the group chat"); $("#copyBox").hidden = true; }
+  catch { const b = $("#copyBox"); b.hidden = false; b.value = text; b.focus(); b.select(); toast("Select all and copy"); }
+};
+render();
+})();
+</script>
+</body>
+</html>
