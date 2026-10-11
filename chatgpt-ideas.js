@@ -528,6 +528,41 @@ const chatGPTVideoIdeas = [
     "MIDPOINT CHECK — At a safe stop, repeat the lineup: dusty shoes, half water, creased map, crumbs, keys with a gas receipt. Keep camera height identical.",
     "HUMAN CHECK — Ask each owner for one word now versus departure. Cut 'ready' to 'tired,' 'organized' to 'hungry,' and one unchanged 'excited.'",
     "PAYOFF — At the destination, arrange the five used items against the view. Friends walk past them toward the trail. Text: 'Nothing stayed perfect. We still arrived.'"
+  ]),
+  scriptedIdea("chatgpt-reverse-unpack", "Pack the Car in Reverse", "Film unloading first, then reverse the action into a seamless, satisfying departure sequence.", [
+    "HOOK — At the destination with the car parked, film one bag being pulled from the trunk. Text: 'How we packed in twelve seconds.' Keep the camera locked behind the car.",
+    "UNLOAD PIECES — Record every bag, cooler, pillow, and shoe leaving the trunk separately. Hands exit in clean directions and nobody blocks the lens.",
+    "REVERSE EDIT — Reverse each clip so objects appear to fly neatly into place. Cut on impacts and use zipper, thump, and door sounds recorded separately.",
+    "REALITY CUT — Smash cut to the actual Fayetteville packing chaos: friends repacking twice and sitting on a duffel. Text: 'How it really happened.'",
+    "PAYOFF — Reverse the trunk close into an opening at the destination. The giant pillow falls out. Dialogue: 'Editing cannot fix everything.'"
+  ]),
+  scriptedIdea("chatgpt-gas-pump-timecapsule", "Gas Pump Time Capsule", "Record one ten-second message at each fuel stop and watch the group's confidence change honestly.", [
+    "HOOK — At the first parked fuel stop, hold the receipt like a slate: location, mileage, time. Ask, 'Message for ourselves at the next tank?'",
+    "FIRST MESSAGE — Each friend contributes one quick prediction or request: better snacks, fewer repeats, or a nap. Keep card and payment details out of frame.",
+    "NEXT-TANK PLAYBACK — Safely parked at the next stop, play the prior message on speaker and capture reactions before recording the new update.",
+    "ENERGY ARC — Repeat through daylight, weather, and clothing changes. Show honest costs and miles without live location details or filming strangers.",
+    "PAYOFF — Play every message at arrival in rapid order, then record the final one against the view: 'Tired was temporary.'"
+  ]),
+  scriptedIdea("chatgpt-food-stop-trade", "The Road Trip Food Trade Deadline", "Turn a shared meal stop into a mock sports trade built around everyone's unwanted side dishes.", [
+    "HOOK — At the table, Daxton announces: 'The trade deadline closes in sixty seconds.' Show fries, pickles, sauces, and unopened sides without including strangers.",
+    "OFFERS — Friends propose trades directly to camera: two pickles for half the fries, sauce rights for one bite. Add player-card graphics and no real pressure to share.",
+    "NEGOTIATION — Capture hands moving food only between consenting friends. Keep allergies, dietary needs, and hygiene respected; nobody must participate.",
+    "BLOCKBUSTER — One ridiculous multi-person trade solves everyone's order. Freeze on the exchange with fake breaking-news music and a diagram.",
+    "PAYOFF — Reveal every plate empty except the one item nobody wanted. Its owner says, 'I am entering free agency.' Pack or discard responsibly."
+  ]),
+  scriptedIdea("chatgpt-scenery-color-match", "Follow One Color West", "Match one color at every safe stop so ordinary roadside details gradually become mountain scenery.", [
+    "HOOK — In Fayetteville, point to one bright blue item on the packed car. Text: 'Follow this color until Wyoming.' Fill the frame with it.",
+    "MATCH ONE — Pull away from blue packaging at a parked fuel stop, then find the same blue on a sign, cup, or friend's jacket. Keep the transition direction consistent.",
+    "LANDSCAPE SHIFT — Progress from objects to sky, water, distant hills, and finally mountain shadow. Passengers capture driving views only when safe and legal.",
+    "GROUP THREAD — Let each friend discover one match and point it into the lens. Include a miss where someone confidently presents the wrong shade.",
+    "PAYOFF — Final blue object lowers to reveal the destination sky. Text: 'We did not chase perfect weather. Just one detail.'"
+  ]),
+  scriptedIdea("chatgpt-last-stop-contract", "The Last-Stop Contract", "Make the group negotiate one final stop before arrival, balancing hunger, time, fuel, and patience.", [
+    "HOOK — Parked with the route visible, Daxton says: 'One stop left. Everyone gets one demand.' Put four blank contract lines on screen.",
+    "DEMANDS — Friends request bathroom, food, fuel, coffee, or a stretch. State real constraints: closing time, remaining miles, budget, and driver fatigue.",
+    "NEGOTIATION — Combine needs into one safe location. Cross out options that require rushing or unnecessary detours and show the final group choice.",
+    "STOP EXECUTION — Film a brisk honest montage: refuel, stretch, buy food, switch rested drivers, check trash. Keep the camera with passengers or tripod.",
+    "PAYOFF — At arrival, reveal the signed contract taped inside the parked car. Final clause reads: 'Nobody says we should have stopped earlier.'"
   ])
 ];
 
