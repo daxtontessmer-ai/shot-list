@@ -198,6 +198,14 @@ if (!data.meta.chatgptIdeasV11) {
   data.meta.chatgptIdeasV11 = true;
   save();
 }
+if (!data.meta.chatgptIdeasV12) {
+  let chatGPTCategory = data.cats.find(c => c.cat === CHATGPT_CAT);
+  if (!chatGPTCategory) { chatGPTCategory = {cat:CHATGPT_CAT,videos:[]}; data.cats.unshift(chatGPTCategory); }
+  const existing = new Set(chatGPTCategory.videos.map(v => v.id));
+  CHATGPT_IDEAS.forEach(idea => { if (!existing.has(idea.id)) chatGPTCategory.videos.push(JSON.parse(JSON.stringify(idea))); });
+  data.meta.chatgptIdeasV12 = true;
+  save();
+}
 function saveOpen(){ try { localStorage.setItem(KEY+".open", JSON.stringify([...open])); } catch {} }
 function toast(m){ $("#toast").innerHTML = `<div class="toast">${esc(m)}</div>`; clearTimeout(toast.t); toast.t = setTimeout(()=>$("#toast").innerHTML="", 1800); }
 const allVids = () => data.cats.flatMap(c => c.videos);
