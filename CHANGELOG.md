@@ -1,0 +1,17 @@
+# Changelog
+
+Every commit made by Codex includes a concise summary and an America/Chicago timestamp here.
+
+## 2026-10-11
+
+- **2026-10-11 1:34 PM CDT** — Started the first five-idea loop batch immediately: **The Last Bag Relay**, **Passenger Window Time Machine**, **Gas Station Snack Court**, **Roadside Stop Olympics**, and **The Driver Swap Transformation**. Each includes five executable scenes spanning packing, departure, safe stop-based driving progression, food-stop comedy, respectful bathroom-stop humor, matched transitions, and arrival payoffs.
+- **2026-10-11 1:31 PM CDT** — Added **One Second From Every Stop**, a repeatable composition that documents fuel, food, bathroom, and roadside stops through changing scenery and group energy. The script includes safe passenger-only driving inserts, a consistent clap transition, an arrival variation, and a quiet Tetons payoff.
+- **2026-10-11 1:26 PM CDT** — Added **Every Receipt Between Fayetteville and the Tetons**, a six-scene travel-cost diary covering departure, fuel, food, receipt match cuts, an unplanned expense, and a transparent per-person payoff. The script explicitly protects payment details while making the trip feel attainable without claiming travel is free.
+- **2026-10-11 1:24 PM CDT** — Added four fully scripted journey-start concepts exclusively to `CHATGPT'S VIDEO IDEAS`: **Trunk Tetris: The Road Trip Draft**, **The Things Everyone Says Before Leaving**, **Everyone Gets a Road Trip Job**, and **Gas Station Pit Crew**. The new shot lists cover packing, pulling away, driver and passenger dynamics, missed turns, driver swaps, fuel, windows, snacks, bathrooms, and roadside transitions. Updated the recurring five-minute loop to prioritize packing, driving, and stop-specific concepts.
+- **2026-10-11 1:18 PM CDT** — Added four fully scripted, non-corny travel concepts exclusively to `CHATGPT'S VIDEO IDEAS`: **Use the Weekend You Already Have**, **Nobody Felt Ready**, **Checking Out With Excuses**, and **The Doorway Out of Fayetteville**. Each includes an immediate hook, executable shots, dialogue, props, transitions, honest travel friction, and a grounded payoff. Added a one-time catalog migration so new scripts appear once while deleted ideas stay deleted.
+- **2026-10-11 12:36 AM CDT** — Added an isolated `CHATGPT'S VIDEO IDEAS` section without changing existing sections. Added a visible per-idea × delete control, research notes, and the first fully scripted transition concept: **Daxton's Idea: Fell Asleep in Fayetteville, Woke Up in the Tetons**, credited to Daxton and broken into eight executable scenes with hook, match cut, dialogue, props, payoff, and loop.
+
+## 2026-10-09
+
+- **2026-10-09 8:06 PM CDT** — Created the `beta` branch from `main` for shared trip-planning work.
+- **2026-10-09 8:08 PM CDT** — Added two collaboration transports in one shared sync layer: PeerJS data channels for live multi-device rooms and BroadcastChannel for same-device tabs. Added join/host controls, timestamp-based stale-update protection, service-worker cache versioning, and automated coverage for room updates and initial snapshots. The design gives five friends a no-account room code while preserving offline-first local storage; durable cloud persistence and stronger conflict handling remain follow-up work.
